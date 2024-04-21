@@ -1,0 +1,6 @@
+@MyAPIThomy_HostAddress = http://localhost:5258
+
+GET {{MyAPIThomy_HostAddress}}/clients/list
+Accept: application/json
+
+###
