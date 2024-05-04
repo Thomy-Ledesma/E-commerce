@@ -3,41 +3,42 @@ import UserForm from './UserForm/UserForm';
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'react-bootstrap';
 import './App.css'
 
-const URL = "https://localhost:7051/clients/"
+const URL = "https://localhost:7051/products/"
 
 
 function App() {
-  const [userList, setUserList] = useState([]);
+  const [productList, setProductList] = useState([]);
   
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch(URL + "listUsers").then(response => response.json())
-      setUserList(result)
+      const result = await fetch(URL + "listProducts").then(response => response.json())
+      setProductList(result)
       console.log(result)
     }
     fetchData();
   }, []);
 
-  const addUser = (name, age)=>{
+  /*const addUser = (name, age)=>{
     fetch(URL + `saveNewUser?name=${name}&age=${age}`,{
       method: 'POST'
     })
-  }
+  }*/
 
   return (
-    <>
+    <> 
     <ul>
-      {userList.map((user)=>{
+      {productList.map((album)=>{
+        let photo = (`Covers/${album["photoURL"]}`) /*no funciona */
         return(
-          <li key={user["id"]}>
-            <h2>name: {user["name"]}</h2>
-            <h2>name: {user["age"]}</h2>
+          <li key={album["id"]}>
+            <img src={photo} height={220} width={220}/> 
+            <h2>{album["name"]}</h2>
           </li>
         )
       })}
     </ul>
     </>
-  );
+  ); //no se como agregar la imagen a la pag
 }
 
 export default App

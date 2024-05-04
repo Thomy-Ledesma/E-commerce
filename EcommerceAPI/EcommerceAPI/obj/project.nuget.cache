@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sTL0PtEvuwBLWknTJMqjEknq4BiXPNznbyRl5QL/WpxuTc+kMaH2iP96FiSJvfP9/DD40jPNJaq1ygMYqsg6Uw==",
+  "dgSpecHash": "qOsrvZ4+lqpoKXULz6hJXDhgOQMeP8BtZDQV14fWr9t6ZstUBMCuoBzMVjGwg262SzrwMqAUTlRoZlRf6/sxwQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Operador\\Desktop\\facu\\Lab-3\\E-commerce\\MyAPIThomy\\EcommerceAPI\\EcommerceAPI.csproj",
+  "projectFilePath": "C:\\Users\\Operador\\Desktop\\facu\\Lab-3\\E-commerce\\EcommerceAPI\\EcommerceAPI\\EcommerceAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Operador\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Operador\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
