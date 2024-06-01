@@ -39,7 +39,7 @@ namespace EcommerceAPI.Models
         [BsonElement("purchased")]
         public List<string> Purchased { get; set; }
 
-        [BsonElement("userTyper")]
+        [BsonElement("userType")]
         public int UserType { get; }
     }
 }

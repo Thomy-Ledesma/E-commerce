@@ -22,13 +22,16 @@ function App() {
     fetch(URL + `saveNewUser?name=${name}&age=${age}`,{
       method: 'POST'
     })
-  }*/
+  }
+  
+  :(
+  */
 
   return (
     <> 
     <ul>
       {productList.map((album)=>{
-        let photo = (`Covers/${album["photoURL"]}`) /*no funciona */
+        let photo = (`Covers/${album["photoURL"]}`)
         return(
           <li key={album["id"]}>
             <img src={photo} height={220} width={220}/> 
@@ -38,7 +41,6 @@ function App() {
       })}
     </ul>
     </>
-  ); //no se como agregar la imagen a la pag
-}
+  );}
 
 export default App

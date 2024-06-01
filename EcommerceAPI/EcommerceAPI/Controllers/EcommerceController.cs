@@ -218,11 +218,5 @@ namespace EcommerceAPI.Controllers
 
 /*
  TO DO:
-    -metodo get para recuperar 1 usuario (para login y tener acceso al carrito, wishlist y lista de productos adquiridos
     -metodo get para recuperar productos en base a su categoría
-    
-    -metodo agregar revier:
-                            -buscar por id si ese usuario ya creó una reseña
-                                -si no la creo, crear una y agregarla al array
-                                -si la creo, actualizar la reseña existente
  */

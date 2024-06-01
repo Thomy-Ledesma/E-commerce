@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "EcommerceAPI\\Controllers\\EcommerceController.cs",
               "ToolTip": "C:\\Users\\Operador\\Desktop\\facu\\Lab-3\\E-commerce\\EcommerceAPI\\EcommerceAPI\\Controllers\\EcommerceController.cs",
               "RelativeToolTip": "EcommerceAPI\\Controllers\\EcommerceController.cs",
-              "ViewState": "AQIAAHIAAAAAAAAAAAAMwHgAAAAMAAAA",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAgwBUAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-24T23:23:59.813Z",
               "IsPinned": true,
@@ -46,10 +46,11 @@
               "RelativeDocumentMoniker": "EcommerceAPI\\Models\\Product.cs",
               "ToolTip": "C:\\Users\\Operador\\Desktop\\facu\\Lab-3\\E-commerce\\EcommerceAPI\\EcommerceAPI\\Models\\Product.cs",
               "RelativeToolTip": "EcommerceAPI\\Models\\Product.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABUAAAAdAAAA",
+              "ViewState": "AQIAACAAAAAAAAAAAAAswCoAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-24T23:23:43.091Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -59,10 +60,11 @@
               "RelativeDocumentMoniker": "EcommerceAPI\\Models\\User.cs",
               "ToolTip": "C:\\Users\\Operador\\Desktop\\facu\\Lab-3\\E-commerce\\EcommerceAPI\\EcommerceAPI\\Models\\User.cs",
               "RelativeToolTip": "EcommerceAPI\\Models\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAACkAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-24T23:23:52.804Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             }
           ]
         }
