@@ -1,4 +1,7 @@
-const UserForm = (props)=>{
+// import PropTypes from "prop-types";
+
+
+const UserForm = ()=>{
     return (
         <div>
             <label>name</label>
@@ -6,5 +9,10 @@ const UserForm = (props)=>{
         </div>
     )
 }
+
+UserForm.propTypes = {
+    
+
+  };
 
 export default UserForm

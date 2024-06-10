@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import UserForm from './UserForm/UserForm';
-import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'react-bootstrap';
+import Product from "./components/product/Product"
+// import UserForm from './components/userForm/UserForm';
+// import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'react-bootstrap';
 import './App.css'
 
 const URL = "https://localhost:7051/products/"
@@ -28,7 +29,8 @@ function App() {
   */
 
   return (
-    <> 
+    <div> 
+    <Product/>
     <ul>
       {productList.map((album)=>{
         let photo = (`Covers/${album["photoURL"]}`)
@@ -40,7 +42,7 @@ function App() {
         )
       })}
     </ul>
-    </>
+    </div>
   );}
 
 export default App
