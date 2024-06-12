@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import AlbumCard from '../../components/AlbumCard/AlbumCard';
 
 const URL = "https://localhost:7051/products/"
 function FrontPage() {
@@ -16,22 +17,17 @@ function FrontPage() {
   return (
     <>
     <div> 
-    <ul>
       {productList.map((album)=>{
-        let photo = (`Covers/${album["photoURL"]}`)
         return(
-          <li key={album["id"]}>
-            <img src={photo} height={220} width={220}/> 
-            <h2>{album["name"]}</h2>
-            <h3>${album["price"]}</h3>
-            <h3>rating: {album["reviews"].length > 0 ? album["reviews"].reduce((sum, obj) => sum + obj.rating, 0) / album["reviews"].length : "No reviews yet"}</h3>
-          </li>
+          <AlbumCard album={album} key={album.id}/>
         )
       })}
-    </ul>
     </div>
     </>
   );}
 
 export default FrontPage
 
+/*
+
+*/

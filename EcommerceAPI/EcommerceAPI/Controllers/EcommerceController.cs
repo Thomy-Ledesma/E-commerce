@@ -104,6 +104,27 @@ namespace EcommerceAPI.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+        [HttpGet]
+        [Route("GetAlbum")]
+        public dynamic GetAlbum(string id)
+        {
+            try
+            {
+                var db = new MongoClient("mongodb://localhost:27017");
+                var database = db.GetDatabase("Ecommerce");
+                var products = database.GetCollection<Product>("products");
+                List<Product> album = products.Find(album => album.Id == id).ToList();
+                return album;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging
+                Console.WriteLine("Error: " + ex.Message);
+                // Return an appropriate error response
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
 
 
         [HttpPost]
