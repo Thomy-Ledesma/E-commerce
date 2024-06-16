@@ -5,7 +5,7 @@ namespace EcommerceAPI.Models
 {
     public class User
     {
-        public User(string password, string name, string email)
+        public User(string password, string name, string email) 
         {
             Email = email;
             Name = name;

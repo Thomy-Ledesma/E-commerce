@@ -6,6 +6,16 @@ using MongoDB.Bson;
 
 namespace EcommerceAPI.Controllers
 {
+    public class ProductRequest
+    {
+        public string Name { get; set; }
+        public string Band { get; set; }
+        public List<string> Tracklist { get; set; }
+        public string URL { get; set; }
+        public double Price { get; set; }
+        public string Category { get; set; }
+        public int Amount { get; set; }
+    }
     [ApiController]
     [Route("users")]
     public class UserController : ControllerBase
@@ -29,15 +39,21 @@ namespace EcommerceAPI.Controllers
 
         public dynamic Login(string userEmail, string userPass)
         {
-            var db = new MongoClient("mongodb://localhost:27017");
+            try
+            {
+                var db = new MongoClient("mongodb://localhost:27017");
 
-            var database = db.GetDatabase("Ecommerce");
+                var database = db.GetDatabase("Ecommerce");
 
-            var users = database.GetCollection<User>("users");
+                var users = database.GetCollection<User>("users");
 
-            var user = users.Find(user => (user.Email == userEmail || user.Name == userEmail) && user.Password == userPass).FirstOrDefault();
+                var user = users.Find(user => (user.Email == userEmail || user.Name == userEmail) && user.Password == userPass).FirstOrDefault();
 
-            return user;
+                return user;
+            }
+            catch (Exception) {
+                return "user not found";
+            }
         }
 
         [HttpPost]
@@ -129,9 +145,17 @@ namespace EcommerceAPI.Controllers
 
         [HttpPost]
         [Route("addProduct")]
-        public dynamic AddProduct(string name, string description, string URL, double price, string category)
+        public dynamic AddProduct([FromBody] ProductRequest request)
         {
-            var product = new Product(description: description, name: name, photoURL: URL,price: price, category:    [category]);
+            var product = new Product(
+                band: request.Band,
+                name: request.Name,
+                tracklist: request.Tracklist,
+                photoURL: request.URL,
+                price: request.Price,
+                category: new List<string> { request.Category },
+                amount: request.Amount
+            );
 
             var db = new MongoClient("mongodb://localhost:27017");
 
@@ -141,9 +165,9 @@ namespace EcommerceAPI.Controllers
 
             products.InsertOne(product);
 
-            return name + " was succesfully added";
+            return request.Name + " was successfully added";
         }
-        
+
         [HttpPost]
         [Route("addReview")]
         public dynamic AddReview(string productId, string userId, string comments, double rating)

@@ -5,14 +5,16 @@ namespace EcommerceAPI.Models
 {
     public class Product
     {
-        public Product(string description, string name, string photoURL, List<string> category, double price)
+        public Product(string band, string name,List<string> tracklist, string photoURL, List<string> category, double price, int amount)
         {
             Name = name;
-            Description = description;
+            Band = band;
+            Tracklist = tracklist;
             Reviews = [];
             PhotoURL = photoURL;
             Category = category;
             Price = price;
+            Amount = amount;
         }
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -21,9 +23,12 @@ namespace EcommerceAPI.Models
 
         [BsonElement("name")]
         public string Name { get; set; }
-        
-        [BsonElement("description")]
-        public string Description { get; set; }
+
+        [BsonElement("band")]
+        public string Band { get; set; }
+
+        [BsonElement("tracklist")]
+        public List<string> Tracklist { get; set; }
         
         [BsonElement("reviews")]
         public List<Review> Reviews { get; set; }
@@ -36,6 +41,9 @@ namespace EcommerceAPI.Models
 
         [BsonElement("price")]
         public double Price { get; set; }
+
+        [BsonElement("amount")]
+        public int Amount { get; set; }
     }
 
     public class Review
