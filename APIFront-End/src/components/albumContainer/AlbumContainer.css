@@ -1,0 +1,13 @@
+/* AlbumContainer.css */
+.albums-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.album-card {
+  margin: 10px;
+}

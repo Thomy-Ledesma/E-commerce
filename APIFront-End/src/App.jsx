@@ -1,6 +1,6 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ContextProvider } from './context'; // Import the context provider
+import "./App.css";
 import Pagina2 from './pages/Pagina2/Pagina2';
 import Navbar from './components/NavBar/NavBar';
 import FrontPage from './pages/FrontPage/FrontPage';
@@ -12,7 +12,7 @@ import Login from './pages/login/Login';
 const App = () => {
   return (
     <ContextProvider>  {/* Use the context provider */}
-      <div>
+      <div className='principal-page'>
         <Navbar />
         <Routes>
           <Route path="/" element={<FrontPage />} />
