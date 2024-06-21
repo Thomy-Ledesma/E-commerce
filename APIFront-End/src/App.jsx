@@ -8,6 +8,7 @@ import AlbumPage from './pages/AlbumPage/AlbumPage';
 import NotFound from './pages/NotFound/NotFound';
 import UploadPage from './pages/uploadPage/UploadPage';
 import Login from './pages/login/Login';
+import Footer from './components/footer/Footer'
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/uploadAlbum" element={<UploadPage />} />
           <Route path='/login' element={<Login />} />
         </Routes>
+          <Footer/>
       </div>
     </ContextProvider>
   );
