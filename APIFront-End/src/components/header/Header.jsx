@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
-// import { useContext } from "react";
-// import { Context } from "../../context";
+import { useContext, useState } from "react";
+import { Context } from "../../context";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -10,14 +10,27 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 const Header = () => {
-  // const [loggedUser] = useContext(Context);
-  // const userName = loggedUser?.name || "Guest";
+  const { loggedUser, productList, setFilteredProductList } = useContext(Context);
+  const userName = loggedUser?.name || "Guest";
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (searchTerm !== '') {
+      const lowercasedSearchTerm = searchTerm.toLowerCase();
+      const filtered = productList.filter(album =>
+        album.name.toLowerCase().includes(lowercasedSearchTerm) ||
+        album.band.toLowerCase().includes(lowercasedSearchTerm)
+      );
+      setFilteredProductList(filtered);
+    }
+  }
 
   return (
     <div className="container">
       <Navbar expand="lg" className="bg-black text-white" data-bs-theme="dark">
         <Container fluid>
-          <Navbar.Brand as={Link} to="/">
+          <Navbar.Brand as={Link} to="/" onClick={() => setFilteredProductList(productList)}>
             <img
               src="public\src\logo-discomaniacos.jpeg"
               alt="Logo"
@@ -50,16 +63,17 @@ const Header = () => {
                 </NavDropdown.Item>
               </NavDropdown>
 
-              <Form className="d-flex">
+              <Form className="d-flex" onSubmit={handleSubmit}>
                 <Form.Control
                   type="search"
                   placeholder="Search"
                   className="me-2"
                   aria-label="Search"
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <Button variant="outline-success">Search</Button>
+                <Button variant="outline-success" type="submit">Search</Button>
               </Form>
-              <Nav.Link as={Link} to="/uploadAlbum" enabled>
+              <Nav.Link as={Link} to="/uploadAlbum">
                 Subir Album
               </Nav.Link>
             </Nav>
@@ -72,6 +86,7 @@ const Header = () => {
               <Button as={Link} to="/Registrarse" variant="outline-primary">
                 Registrarse
               </Button>
+              <h3>{userName}</h3>
             </div>
           </div>
         </Container>

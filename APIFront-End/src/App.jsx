@@ -18,7 +18,7 @@ const App = () => {
       <div className='principal-page'>
         <Navbar />
         <Routes>
-          <Route path="/" element={<FrontPage />} />
+          <Route path="/" element={<FrontPage />}  />
           <Route path="/placeholder" element={<Pagina2 />} />
           <Route path="/album/:albumId" element={<AlbumPage />} />
           <Route path="*" element={<NotFound />} />

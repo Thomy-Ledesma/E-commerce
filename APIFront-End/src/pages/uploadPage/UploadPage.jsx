@@ -40,6 +40,7 @@ const UploadPage = () => {
         body: JSON.stringify(album),
       }).then(() =>{
         console.log(album)
+        window.location.reload();
       })
     } catch (error) {
       console.error('There was an error adding the product!', error);

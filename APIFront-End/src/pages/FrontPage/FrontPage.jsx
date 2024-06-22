@@ -1,23 +1,13 @@
 import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { Context } from "../../context";
 // import AlbumCard from '../../components/AlbumCard/AlbumCard';
 import AlbumContainer from "../../components/albumContainer/AlbumContainer";
 
 
 
-const URL = "https://localhost:7051/products/";
 function FrontPage() {
-  const [productList, setProductList] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(URL + "listProducts").then((response) =>
-        response.json()
-      );
-      setProductList(result);
-      console.log(result);
-    };
-    fetchData();
-  }, []);
+  const { filteredProductList } = useContext(Context);
 
   // return (
   //   <>
@@ -34,7 +24,7 @@ function FrontPage() {
 
   return (
     <div>
-      <AlbumContainer albums={productList} />      
+      <AlbumContainer albums={filteredProductList} />      
       
     </div>
   );

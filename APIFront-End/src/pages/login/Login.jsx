@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 const Login = () => {
-  const [loggedUser, setLoggedUser] = useContext(Context);
+  const {loggedUser, setLoggedUser} = useContext(Context);
   const URL = "https://localhost:7051/users/login";
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -25,8 +25,9 @@ const Login = () => {
       }
 
       const data = await response.json();
-      setLoggedUser(data);
+      sessionStorage.setItem('user', JSON.stringify(data));
       console.log('User logged in:', data); // Debugging log
+      setLoggedUser(JSON.parse(sessionStorage.getItem('user')));
     } catch (error) {
       console.log('Error during login:', error);
     }
