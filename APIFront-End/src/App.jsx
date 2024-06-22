@@ -1,8 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 import { ContextProvider } from './context'; // Import the context provider
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Pagina2 from './pages/Pagina2/Pagina2';
-import Navbar from './components/NavBar/NavBar';
+import Navbar from './components/header/Header';
 import FrontPage from './pages/FrontPage/FrontPage';
 import AlbumPage from './pages/AlbumPage/AlbumPage';
 import NotFound from './pages/NotFound/NotFound';
