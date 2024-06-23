@@ -11,8 +11,8 @@ const AlbumCard = (props) => {
       <Card className="album-card" style={{ width: "14rem", height: "24rem" }}>
         <Card.Img variant="top" src={`Covers/${props.album["photoURL"]}`} />
         <Card.Body>
-          <Card.Title>{props.album.band}</Card.Title>
-          <Card.Title>{props.album.name}</Card.Title>
+          <Card.Title className="album-card-title">{props.album.band}</Card.Title>
+          <Card.Subtitle className="album-card-title">{props.album.name}</Card.Subtitle>
 
           <Card.Subtitle>
             {props.album["reviews"].length > 0
@@ -22,10 +22,11 @@ const AlbumCard = (props) => {
                 ) / props.album["reviews"].length
               : "No reviews yet"}
           </Card.Subtitle>
-          <Card.Text>${props.album.price}</Card.Text>
-          <Button variant="primary" size="sm">
+          <Card.Text className="album-card-text">${props.album.price}</Card.Text>
+          <Button variant="primary"  size="sm">
             <Link to={`/album/${props.album["id"]}`}>Buy</Link>
           </Button>
+          
         </Card.Body>
       </Card>
     

@@ -1,3 +1,5 @@
+import "./Footer.css";
+
 const Footer = () => {
   return (
     <div className="container-fluid">
@@ -41,7 +43,7 @@ const Footer = () => {
         </div>
         <div className="col-xs-12 pt-4">
           <p className="text-white text-center">
-            Copyright - All rights reserverd © 2024
+            Copyright - All rights reserved © 2024
           </p>
         </div>
       </div>

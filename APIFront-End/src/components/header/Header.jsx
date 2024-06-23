@@ -71,7 +71,7 @@ const Header = () => {
                   aria-label="Search"
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <Button variant="outline-success" type="submit">Search</Button>
+                <Button variant="warning" type="submit">Search</Button>
               </Form>
               <Nav.Link as={Link} to="/uploadAlbum">
                 Subir Album
@@ -80,10 +80,10 @@ const Header = () => {
           </Navbar.Collapse>
           <div className="custom-button">
             <div className="d-flex gap-2">
-              <Button as={Link} to="/Login" variant="outline-primary">
+              <Button as={Link} to="/Login" variant="warning" className="custom-button">
                 Login
               </Button>
-              <Button as={Link} to="/Registrarse" variant="outline-primary">
+              <Button as={Link} to="/Registrarse" variant="warning" className="custom-button">
                 Registrarse
               </Button>
               <h3>{userName}</h3>

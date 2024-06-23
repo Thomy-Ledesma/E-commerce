@@ -113,7 +113,7 @@
     "price": 15,
     "amount": 3
 },
-5
+5 TIRA ERROR
 {
   "name": "Hellbilly Deluxe",
     "band": "Rob Zombie",
@@ -159,7 +159,7 @@
     "price": 15,
     "amount": 3
 },
-7
+7 TIRA ERROR
 {
   "name": "Oops!...I Did It Again",
     "band": "Britney Spears",
@@ -182,7 +182,7 @@
     "price": 23,
     "amount": 15
 },
-8
+8 TIRA ERROR
 {
   "name": "Like A Virgin",
     "band": "Madonna",

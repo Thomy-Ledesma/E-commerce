@@ -1,3 +1,9 @@
 .principal-page {
   background-color: black;
 };
+
+footer {
+  background: #333; /* Ejemplo de fondo oscuro */
+  color: white; /* Texto blanco */
+  padding: 1rem; /* Ejemplo de padding */
+}
