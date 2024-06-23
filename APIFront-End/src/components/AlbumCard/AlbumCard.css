@@ -29,3 +29,12 @@
   height: 300px; /* Ajusta la altura de la imagen según tu diseño */
   object-fit: cover;
 }
+
+.button-buy .button-link {
+  color: black;
+  text-decoration: none;
+}
+
+.button-buy .button-link:hover {
+  color: black; /* Mantén el color negro incluso cuando el enlace sea seleccionado */
+}

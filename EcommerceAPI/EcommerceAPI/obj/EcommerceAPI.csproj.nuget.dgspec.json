@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Operador\\Desktop\\facu\\Lab-3\\E-commerce\\EcommerceAPI\\EcommerceAPI\\EcommerceAPI.csproj": {}
+    "C:\\React Proyects\\tpi-discomaniacos\\E-commerce\\EcommerceAPI\\EcommerceAPI\\EcommerceAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Operador\\Desktop\\facu\\Lab-3\\E-commerce\\EcommerceAPI\\EcommerceAPI\\EcommerceAPI.csproj": {
+    "C:\\React Proyects\\tpi-discomaniacos\\E-commerce\\EcommerceAPI\\EcommerceAPI\\EcommerceAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Operador\\Desktop\\facu\\Lab-3\\E-commerce\\EcommerceAPI\\EcommerceAPI\\EcommerceAPI.csproj",
+        "projectUniqueName": "C:\\React Proyects\\tpi-discomaniacos\\E-commerce\\EcommerceAPI\\EcommerceAPI\\EcommerceAPI.csproj",
         "projectName": "EcommerceAPI",
-        "projectPath": "C:\\Users\\Operador\\Desktop\\facu\\Lab-3\\E-commerce\\EcommerceAPI\\EcommerceAPI\\EcommerceAPI.csproj",
-        "packagesPath": "C:\\Users\\Operador\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Operador\\Desktop\\facu\\Lab-3\\E-commerce\\EcommerceAPI\\EcommerceAPI\\obj\\",
+        "projectPath": "C:\\React Proyects\\tpi-discomaniacos\\E-commerce\\EcommerceAPI\\EcommerceAPI\\EcommerceAPI.csproj",
+        "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
+        "outputPath": "C:\\React Proyects\\tpi-discomaniacos\\E-commerce\\EcommerceAPI\\EcommerceAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Operador\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ivan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +25,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -91,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

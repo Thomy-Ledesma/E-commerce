@@ -23,7 +23,7 @@ const AlbumCard = (props) => {
               : "No reviews yet"}
           </Card.Subtitle>
           <Card.Text className="album-card-text">${props.album.price}</Card.Text>
-          <Button variant="primary"  size="sm">
+          <Button className="button-buy"variant="warning"   size="sm">
             <Link to={`/album/${props.album["id"]}`}>Buy</Link>
           </Button>
           
