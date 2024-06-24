@@ -12,11 +12,11 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 const Header = () => {
   const { loggedUser, setLoggedUser, productList, setFilteredProductList } =
     useContext(Context);
-  const userName = loggedUser?.name || "Guest";
+  const userName = loggedUser?.name || "";
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     navigate("/")
     if (searchTerm !== "") {
@@ -39,6 +39,9 @@ const Header = () => {
 
   const handleLogOut = () => {
     setLoggedUser(null)
+    sessionStorage.removeItem('user')
+    navigate("/")
+    window.location.reload();
   }
 
   return (
@@ -94,9 +97,10 @@ const Header = () => {
                   Search
                 </Button>
               </Form>
-              <Nav.Link as={Link} to="/uploadAlbum">
+              {loggedUser? <Nav.Link as={Link} to="/uploadAlbum">
                 Subir Album
-              </Nav.Link>
+              </Nav.Link> : null}
+              
             </Nav>
           </Navbar.Collapse>
           {loggedUser ? <div className="custom-button">
