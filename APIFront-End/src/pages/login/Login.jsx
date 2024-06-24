@@ -1,44 +1,40 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Context } from '../../context';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import useUser from '../../hooks/useAlbums';
+import useUser from '../../hooks/useUser';
 
 const Login = () => {
-  const {loggedUser, setLoggedUser} = useContext(Context);
-  const URL = "https://localhost:7051/users/login";
+  const { setLoggedUser } = useContext(Context);
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [loginRequest, setLoginRequest] = useState({ userEmail: '', userPass: '' });
+  const [data, loading, error, loginUser] = useUser();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const params = new URLSearchParams({ userEmail: name, userPass: password });
-
-    try {
-      const response = await fetch(`${URL}?${params.toString()}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(`Error: ${response.status} ${response.statusText}, Details: ${JSON.stringify(errorData)}`);
-      }
-
-      const data = await response.json();
-      sessionStorage.setItem('user', JSON.stringify(data));
-      console.log('User logged in:', data); // Debugging log
-      setLoggedUser(JSON.parse(sessionStorage.getItem('user')));
-    } catch (error) {
-      console.log('Error during login:', error);
-    }
+    setLoginRequest({ userEmail: name, userPass: password });
   };
 
+  useEffect(() => {
+    if (loginRequest.userEmail && loginRequest.userPass) {
+      loginUser(loginRequest);
+    }
+  }, [loginRequest]);
+
+  useEffect(() => {
+    if (data) {
+      sessionStorage.setItem('user', JSON.stringify(data));
+      setLoggedUser(data);
+    }
+  }, [data, setLoggedUser]);
+
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
+    <div className="upload-page d-flex justify-content-center align-items-center">
+      <Form className="upload-form" onSubmit={handleSubmit}>
+      <h2 className="text-center mb-4 text-white">Log In</h2>
         <Form.Group className="mb-3" controlId="formUserName">
-          <Form.Label>User</Form.Label>
+          <Form.Label className="form-title">User</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter email or username"
@@ -49,7 +45,7 @@ const Login = () => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label className="form-title">Password</Form.Label>
           <Form.Control
             type="password"
             placeholder="Enter password"
@@ -59,11 +55,12 @@ const Login = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Submit
+        <Button variant="primary" type="submit" disabled={loading}>
+          {loading ? 'Logging in...' : 'Log In'}
         </Button>
+        {error && <p className="text-danger">{error}</p>}
       </Form>
-    </>
+    </div>
   );
 };
 
