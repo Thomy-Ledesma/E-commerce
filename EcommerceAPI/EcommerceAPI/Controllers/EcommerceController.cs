@@ -6,6 +6,12 @@ using MongoDB.Bson;
 
 namespace EcommerceAPI.Controllers
 {
+    public class UserRequest
+    {
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+    }
     public class ProductRequest
     {
         public string Name { get; set; }
@@ -57,20 +63,22 @@ namespace EcommerceAPI.Controllers
         }
 
         [HttpPost]
-        [Route("saveNewUser")]
-        public dynamic AddUser(string name, string password, string email)
-        {   
-            var client = new User(password: password, name:name, email: email);
-            
+        [Route("addUser")]
+        public dynamic AddUser([FromBody] UserRequest request)
+        {
+            var client = new User(
+                password: request.Password,
+                name: request.Name,
+                email: request.Email
+            );
+
             var db = new MongoClient("mongodb://localhost:27017");
-            
             var database = db.GetDatabase("Ecommerce");
-            
             var clients = database.GetCollection<User>("users");
-            
+
             clients.InsertOne(client);
-            
-            return "user " + name + " was succesfully added";
+
+            return "User " + request.Name + " was successfully added";
         }
 
         [HttpDelete]

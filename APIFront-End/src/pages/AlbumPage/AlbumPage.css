@@ -1,0 +1,48 @@
+body {
+  color: rgb(28, 28, 28);
+}
+
+.product-container {
+    width: 100%; /* Ajusta el ancho de la tarjeta según tu diseño */
+    height: 100vh; /* Ajusta la altura de la tarjeta según tu diseño */
+    display: flex;
+    align-items: center;
+  }
+
+.product{
+    padding-top: 1em;
+    height: 70vh;
+    border: 1px solid rgb(50, 50, 50);
+    display: flex;
+    width: 100%;
+    max-width: 60%;
+    margin: 0 auto;
+    background-color: aliceblue;
+}
+.album-cover{
+    justify-self: left;
+    height: 40vh;
+}
+  
+.tracklist{
+    height: 40vh;
+    width: 80%;
+    padding: 20px;
+    overflow: auto;
+}
+.tracklist ol {
+  padding-left: 20px;
+}
+
+.tracklist li {
+  margin-left: 20px;
+  font-size: 20px;
+}
+
+
+li{
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+

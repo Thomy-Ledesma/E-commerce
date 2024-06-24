@@ -30,7 +30,7 @@ const Header = () => {
 
   const handleCategory = (category) => {
     const filtered = productList.filter((album) =>
-      album.category.toLowerCase().includes(category.toLowerCase())
+      album.category.includes(category.toLowerCase())
     );
     setFilteredProductList(filtered);
   };

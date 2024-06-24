@@ -11,6 +11,7 @@ import NotFound from './pages/NotFound/NotFound';
 import UploadPage from './pages/uploadPage/UploadPage';
 import Login from './pages/login/Login';
 import Footer from './components/footer/Footer'
+import SignUp from './pages/SignUp/SignUp';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
           <Route path="/uploadAlbum" element={<UploadPage />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/Registrarse' element={<SignUp />} />
         </Routes>
           <Footer/>
       </div>
