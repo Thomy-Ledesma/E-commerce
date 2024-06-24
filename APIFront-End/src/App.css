@@ -7,3 +7,8 @@ footer {
   color: white; /* Texto blanco */
   padding: 1rem; /* Ejemplo de padding */
 }
+
+.main-section{
+  padding: 4em;
+  height: 140vh;
+}

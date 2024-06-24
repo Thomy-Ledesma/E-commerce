@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useContext, useState } from "react";
 import { Context } from "../../context";
@@ -10,13 +10,15 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 const Header = () => {
-  const { loggedUser, productList, setFilteredProductList } =
+  const { loggedUser, setLoggedUser, productList, setFilteredProductList } =
     useContext(Context);
   const userName = loggedUser?.name || "Guest";
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async () => {
     event.preventDefault();
+    navigate("/")
     if (searchTerm !== "") {
       const lowercasedSearchTerm = searchTerm.toLowerCase();
       const filtered = productList.filter(
@@ -30,14 +32,18 @@ const Header = () => {
 
   const handleCategory = (category) => {
     const filtered = productList.filter((album) =>
-      album.category.includes(category.toLowerCase())
+      album.category.includes(category)
     );
     setFilteredProductList(filtered);
   };
 
+  const handleLogOut = () => {
+    setLoggedUser(null)
+  }
+
   return (
     <div className="container">
-      <Navbar expand="lg" className="bg-black text-white" data-bs-theme="dark">
+      <Navbar expand="lg" sticky="top" className="text-white navbar" data-bs-theme="dark">
         <Container fluid>
           <Navbar.Brand
             as={Link}
@@ -58,20 +64,20 @@ const Header = () => {
               navbarScroll
             >
               <NavDropdown title="Categorias" id="navbarScrollingDropdown">
-                <NavDropdown.Item onClick={() => handleCategory("electronica")}>
+                <NavDropdown.Item onClick={() => handleCategory("Electronica")}>
                   Electrónica
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => handleCategory("hip-hop")}>
+                <NavDropdown.Item onClick={() => handleCategory("Hip Hop")}>
                   Hip Hop
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => handleCategory("pop")}>
+                <NavDropdown.Item onClick={() => handleCategory("Pop")}>
                   Pop
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => handleCategory("rock")}>
+                <NavDropdown.Item onClick={() => handleCategory("Rock")}>
                   Rock
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item onClick={() => handleCategory("otros")}>
+                <NavDropdown.Item onClick={() => handleCategory("Otros")}>
                   Otros
                 </NavDropdown.Item>
               </NavDropdown>
@@ -93,7 +99,17 @@ const Header = () => {
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
-          <div className="custom-button">
+          {loggedUser ? <div className="custom-button">
+            <div className="d-flex gap-2">
+              <Button
+                variant="warning"
+                onClick={handleLogOut}
+              >
+                Log Out
+              </Button>
+              <h3>{userName}</h3>
+            </div>
+          </div> : <div className="custom-button">
             <div className="d-flex gap-2">
               <Button
                 as={Link}
@@ -111,9 +127,8 @@ const Header = () => {
               >
                 Registrarse
               </Button>
-              <h3>{userName}</h3>
             </div>
-          </div>
+          </div>}
         </Container>
       </Navbar>
     </div>

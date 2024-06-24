@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { Context } from '../../context';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import useUser from '../../hooks/useAlbums';
 
 const Login = () => {
   const {loggedUser, setLoggedUser} = useContext(Context);

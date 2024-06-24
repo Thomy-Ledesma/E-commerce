@@ -1,4 +1,9 @@
-/* AlbumContainer.css */
+.albums-container-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 125vh; /* Set to the desired height of the container */
+}
+
 .albums-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -6,8 +11,31 @@
   justify-content: center;
   margin: 0 auto;
   max-width: 1000px;
+  flex-grow: 1;
 }
 
 .album-card {
   margin: 10px;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px; /* Optional: add padding for spacing */
+}
+
+.pagination-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 8em;
+}
+
+.pagination-button:disabled {
+  background-color: #ccc;
+  cursor: default;
 }

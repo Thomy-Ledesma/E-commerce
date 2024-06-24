@@ -8,16 +8,23 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const user = {
-      name: name,
-      password: password,
-      email: email
-    };
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match");
+      return;
+    }
 
     try {
+      const user = {
+        name: name,
+        password: password,
+        email: email
+      };
       const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -34,6 +41,7 @@ const SignUp = () => {
       window.location.reload();
     } catch (error) {
       console.error("There was an error adding the user!", error);
+      setErrorMessage("There was an error adding the user! Please try again.");
     }
   };
 
@@ -72,7 +80,19 @@ const SignUp = () => {
             required
           />
         </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formConfirmPassword">
+          <Form.Label className="form-title">Repeat Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+        </Form.Group>
         
+        {errorMessage && <p className="text-danger">{errorMessage}</p>}
+
         <Button variant="warning" type="submit" size="sm">
           Submit
         </Button>

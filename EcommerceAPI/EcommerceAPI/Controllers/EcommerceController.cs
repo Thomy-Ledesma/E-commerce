@@ -66,11 +66,13 @@ namespace EcommerceAPI.Controllers
         [Route("addUser")]
         public dynamic AddUser([FromBody] UserRequest request)
         {
-            var client = new User(
+            try
+            {
+                var client = new User(
                 password: request.Password,
                 name: request.Name,
                 email: request.Email
-            );
+                );
 
             var db = new MongoClient("mongodb://localhost:27017");
             var database = db.GetDatabase("Ecommerce");
@@ -78,8 +80,15 @@ namespace EcommerceAPI.Controllers
 
             clients.InsertOne(client);
 
-            return "User " + request.Name + " was successfully added";
+                return Ok("User " + request.Name + " was successfully added"); 
+            }
+            catch (Exception)
+            {
+                return "Could not complete task";
+            }
         }
+
+            
 
         [HttpDelete]
         [Route("deleteUser")]

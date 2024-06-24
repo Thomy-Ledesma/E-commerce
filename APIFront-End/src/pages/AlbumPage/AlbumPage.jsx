@@ -26,6 +26,7 @@ function AlbumPage() {
   const listatemas = albumInfo.tracklist.map((track, index) => <li key={index}>{track}</li>);
   const rating = albumInfo["reviews"].length > 0 ? albumInfo["reviews"].reduce((sum, obj) => sum + obj.rating, 0) / albumInfo["reviews"].length : "No reviews yet"
   return (
+    <>
     <div className='product-container row'>
       <div className='product'>
         <div className='col-5' style={{margin:'2em'}}>
@@ -44,6 +45,7 @@ function AlbumPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
