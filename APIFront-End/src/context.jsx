@@ -29,7 +29,7 @@ export const ContextProvider = ({ children }) => {
 
 
   return (
-    <Context.Provider value={{loggedUser, setLoggedUser, productList, filteredProductList, setFilteredProductList}}>
+    <Context.Provider value={{loggedUser, setLoggedUser, productList, setProductList, filteredProductList, setFilteredProductList}}>
       {children}
     </Context.Provider>
   );

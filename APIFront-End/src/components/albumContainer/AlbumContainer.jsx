@@ -35,7 +35,7 @@ const AlbumContainer = ({ albums }) => {
           <AlbumCard key={album.id} album={album} />  // Usar album.id como key única
         ))
       ) : (
-        <p>No hay álbumes</p>
+        <p className="text-white">No hay álbumes</p>
       )}
     </div>
   );

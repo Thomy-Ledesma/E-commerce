@@ -122,7 +122,7 @@
 	"Superbeast",
 	"Dragula",
 	"Living Dead Girl",
-	"Perversion 99,
+	"Perversion 99",
 	"Demonoid Phenomenon",
 	"Spookshow Baby",
 	"How To Make A Monster",
@@ -159,7 +159,7 @@
     "price": 15,
     "amount": 3
 },
-7 TIRA ERROR
+7
 {
   "name": "Oops!...I Did It Again",
     "band": "Britney Spears",
@@ -182,7 +182,7 @@
     "price": 23,
     "amount": 15
 },
-8 TIRA ERROR
+8
 {
   "name": "Like A Virgin",
     "band": "Madonna",
@@ -217,7 +217,7 @@
 	"Tora! Tora! Tora!",
 	"Big Muff",
 	"Any Second Now (Voices)",
-	"Just Can't Get Enough",
+	"Just Can't Get Enough"
     ],
     "url": "../../public/Covers/Speak-Spell.jpg",
     "category": "Rock",
@@ -238,7 +238,7 @@
     	"Get Right With Me",
     	"Rush",
     	"One Caress",
-    	"Higher Love",
+    	"Higher Love"
     ],
     "url": "../../public/Covers/Songs-Of-Faith-And-Devotion.jpg",
     "category": "Rock",
@@ -258,7 +258,7 @@
     	"No Me Dejan Salir",
     	"Los Dinosaurios",
     	"Plateado Sobre Plateado (Huellas En El Mar)",
-    	"Ojos De Videotape",
+    	"Ojos De Videotape"
     ],
     "url": "../../public/Covers/Clics-Modernos.jpg",
     "category": "Rock",
@@ -283,7 +283,7 @@
     	"Casa Vacía",
     	"Podrías Entender",
     	"Intuición",
-    	"La Vanguardia Es Así",
+    	"La Vanguardia Es Así"
     ],
     "url": "../../public/Covers/Say-No-More.jpg",
     "category": "Rock",
@@ -314,7 +314,7 @@
     "As The World Turns",
     "I'm Shady",
     "Bad Meets Evil",
-    "Still Don't Give A Fuck",
+    "Still Don't Give A Fuck"
     ],
     "url": "../../public/Covers/The-Real-Slim-Shady.jpg",
     "category": "Hip Hop",
@@ -341,7 +341,7 @@
     	"The Doctor's Office",
     	"Stranded On Death Row",
     	"The Roach (The Chronic Outro)",
-    	"Bitches Ain't Shit",
+    	"Bitches Ain't Shit"
     ],
     "url": "../../public/Covers/The-Chronic.jpg",
     "category": "Hip Hop",
@@ -371,7 +371,7 @@
     	"Gz And Hustlas",
     	"Untitled",
     	"Gz Up, Hoes Down",
-    	"Pump Pump",
+    	"Pump Pump"
     ],
     "url": "../../public/Covers/Doggy-Style.jpg",
     "category": "Hip Hop",
@@ -410,7 +410,7 @@
     "9 Nites To Nowhere",
     "Watchn U",
     "Run",
-    "Got 2 Make It",
+    "Got 2 Make It"
     ],
     "url": "../../public/Covers/A-B-C-D.jpg",
     "category": "Electronica",
@@ -438,7 +438,7 @@
     "Remix – Osunlade",
     "Run Dat Shit",
     "Producer – Amayss, Dez*",
-    "Pleasure",
+    "Pleasure"
     ],
     "url": "../../public/Covers/Andres-4.jpg",
     "category": "Otros",
@@ -458,7 +458,7 @@
     "Bambi",
     "Still Waiting",
     "I Feel For You",
-    "It's Gonna Be Lonely",
+    "It's Gonna Be Lonely"
     ],
     "url": "../../public/Covers/Prince-Album.jpg",
     "category": "Otros",
@@ -476,7 +476,7 @@
     "Private Joy",
     "Let's Work",
     "Annie Christian",
-     "Jack U Off",
+     "Jack U Off"
     ],
     "url": "../../public/Covers/Prince-Controversy.jpg",
     "category": "Otros",
@@ -496,7 +496,7 @@
     "What Is This Thing Called Love?",
     "Spring Is Here",
     "Someday My Prince Will Come",
-    "Blue In Green",
+    "Blue In Green"
     ],
     "url": "../../public/Covers/Portrait-In-jazz.jpg",
     "category": "Otros",
@@ -506,18 +506,18 @@
 22
 {
   "name": "Miles Davis And The Modern Jazz Giants",
-    "band": "Miles Davis ",
+    "band": "Miles Davis",
     "tracklist": [
     "The Man I Love (Take 2)",
     "Swing Spring",
     "'Round About Midnight",
     "Bemsha Swing",
-    "The Man I Love (Take 1)",
+    "The Man I Love (Take 1)"
     ],
     "url": "../../public/Covers/Miles-Davis-Orchestra.jpg",
-    "category": "",
-    "price": ,
-    "amount": 
+    "category": "Otros",
+    "price": 23,
+    "amount": 1
 },
 23
 {
@@ -535,7 +535,7 @@
     "What's Good",
     "Gone, Gone / Thank You",
     "I Don't Love You Anymore",
-    "Are We Still Friends?",
+    "Are We Still Friends?"
     ],
     "url": "../../public/Covers/IGOR.jpg",
     "category": "Otros",
@@ -559,7 +559,7 @@
     "Tape You",
     "Am I High",
     "Rock Star - Poser",
-    "Bobby James",
+    "Bobby James"
     ],
     "url": "../../public/Covers/In-Search-Of.jpg",
     "category": "Otros",
@@ -587,7 +587,7 @@
     "The Hustle",
     "Little D",
     "Devil Music",
-    "The E.N.D.",
+    "The E.N.D."
     ],
     "url": "../../public/Covers/Labcabincalifornia.jpg",
     "category": "Hip Hop",
@@ -610,7 +610,7 @@
     "Body Movin'",
     "Dime Piece (Remix)",
     "Love Movin'",
-    "Won't Do",
+    "Won't Do"
     ],
     "url": "../../public/Covers/The-Shinning.jpg",
     "category": "Hip Hop",
@@ -632,7 +632,7 @@
     "Time Goes By",
     "If You Wanna Have Some Fun",
     "Oxygen",
-    "Goodbye",
+    "Goodbye"
     ],
     "url": "../../public/Covers/Forever-Spice.jpg",
     "category": "Pop",
@@ -649,7 +649,7 @@
     "Domino Dancing",
     "I'm Not Scared",
     "Always On My Mind / In My House",
-    "It's Alright",
+    "It's Alright"
     ],
     "url": "../../public/Covers/Introspective.jpg",
     "category": "Pop",
@@ -676,7 +676,7 @@
     "Magic America",
     "Jubilee",
     "This Is A Low",
-    "Lot 105",
+    "Lot 105"
     ],
     "url": "../../public/Covers/Parklife.jpg",
     "category": "Rock",
@@ -699,7 +699,7 @@
     "A Place For My Head",
     "Forgotten",
     "Cure For The Itch",
-    "Pushing Me Away",
+    "Pushing Me Away"
     ],
     "url": "../../public/Covers/Hybrid-Theory.jpg",
     "category": "Rock",
@@ -718,7 +718,7 @@
     "Summertime Breeze",
     "Winter Wind & Chill",
     "Caribbean Coast",
-    "One, Three, Five, Seven",
+    "One, Three, Five, Seven"
     ],
     "url": "../../public/Covers/Scenearies-Not-Songs.jpg",
     "category": "Electronica",
@@ -741,7 +741,7 @@
     "For So Long",
     "Ammnesia",
     "The Juice",
-    "Mystery Of Love",
+    "Mystery Of Love"
     ],
     "url": "../../public/Covers/Amnesia-Mr-Fingers.jpg",
     "category": "Electronica",
@@ -761,7 +761,7 @@
 	"Unfinished Sympathy",
 	"Daydreaming",
 	"Lately",
-	"Hymn Of The Big Wheel",
+	"Hymn Of The Big Wheel"
     ],
     "url": "../../public/Covers/Blue-Lines.jpg",
     "category": "Otros",
@@ -783,7 +783,7 @@
 	"Black Milk",
 	"Mezzanine",
 	"Group Four",
-	"(Exchange)",
+	"(Exchange)"
     ],
     "url": "../../public/Covers/Mezzanine.jpg",
     "category": "Otros",
@@ -809,7 +809,7 @@
 	"Cameltosis",
 	"My Gift To You",
 	"(silence)",
-	"(Earache My Eye)",
+	"(Earache My Eye)"
 
     ],
     "url": "../../public/Covers/Follow-The-Leader.jpg",
