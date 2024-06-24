@@ -33,3 +33,7 @@ const useUser = () => {
 };
 
 export default useUser;
+
+/*
+      navigate("/")
+      window.location.reload(); */

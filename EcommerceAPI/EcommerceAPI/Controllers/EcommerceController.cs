@@ -6,6 +6,11 @@ using MongoDB.Bson;
 
 namespace EcommerceAPI.Controllers
 {
+    public class PurchaseRequest
+    {
+        public string ProductId { get; set; }
+        public string UserId { get; set; }
+    }
     public class UserRequest
     {
         public string Name { get; set; }
@@ -88,7 +93,50 @@ namespace EcommerceAPI.Controllers
             }
         }
 
-            
+        [HttpPost]
+        [Route("purchaseAlbum")]
+        public IActionResult PurchaseAlbum([FromBody] PurchaseRequest request)
+        {
+            var db = new MongoClient("mongodb://localhost:27017");
+            var database = db.GetDatabase("Ecommerce");
+
+            var products = database.GetCollection<Product>("products");
+            var users = database.GetCollection<User>("users");
+
+            var productFilter = Builders<Product>.Filter.Eq("_id", ObjectId.Parse(request.ProductId));
+            var userFilter = Builders<User>.Filter.Eq("_id", ObjectId.Parse(request.UserId));
+
+            var product = products.Find(productFilter).FirstOrDefault();
+            var user = users.Find(userFilter).FirstOrDefault();
+
+            if (product == null)
+            {
+                return NotFound(new { message = "Product not found" });
+            }
+
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            // Update the amount of the product
+            var updateAmount = Builders<Product>.Update.Inc("amount", -1);
+            products.UpdateOne(productFilter, updateAmount);
+
+            // Check the updated amount
+            product = products.Find(productFilter).FirstOrDefault();
+            if (product.Amount == 0)
+            {
+                // Delete the product if amount is 0
+                products.DeleteOne(productFilter);
+            }
+
+            // Add the product to the user's purchased array
+            var updateUser = Builders<User>.Update.Push("purchased", request.ProductId);
+            users.UpdateOne(userFilter, updateUser);
+
+            return Ok(new { message = "Album purchased successfully" });
+        }
 
         [HttpDelete]
         [Route("deleteUser")]
