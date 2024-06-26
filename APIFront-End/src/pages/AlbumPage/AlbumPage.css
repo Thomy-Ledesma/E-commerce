@@ -46,3 +46,10 @@ li{
 }
 
 
+.rating{
+  cursor: pointer;
+}
+
+.rating:hover{
+  background-color: aliceblue;
+}
