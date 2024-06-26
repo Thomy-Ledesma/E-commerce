@@ -140,16 +140,21 @@ const UploadPage = () => {
             </Form.Group>
           </div>
           <div className="col-12">
-            <Form.Group className="mb-3" controlId="formCategory">
-              <Form.Label className="form-title">Category</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                required
-              />
-            </Form.Group>
+          <Form.Group className="mb-3" controlId="formCategory">
+        <Form.Label className="form-title">Category</Form.Label>
+        <Form.Control
+          as="select"
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
+          required
+        >
+          <option value="Rock">Rock</option>
+          <option value="Electronica">Electrónica</option>
+          <option value="Hip Hop">Hip Hop</option>
+          <option value="Pop">Pop</option>
+          <option value="Otros">Otros</option>
+        </Form.Control>
+      </Form.Group>
           </div>
           <div className="col-12">
             <Form.Group className="mb-3" controlId="formAmount">
