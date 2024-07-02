@@ -1,7 +1,10 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import ReviewForm from '../reviewForm/ReviewForm';
+import { useState } from 'react';
 
 function ReviewList(props) {
+  const [addReviewShow, setAddReviewShow] = useState(false);
     console.log(props.reviews)
   return (
     <Modal
@@ -27,7 +30,12 @@ function ReviewList(props) {
             })}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={()=>setAddReviewShow(true)}>Add review</Button>
+            <ReviewForm
+                show={addReviewShow}
+                onHide={() => setAddReviewShow(false)}
+              />
+        <Button variant='warning'onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );

@@ -38,14 +38,6 @@ function AlbumPage() {
     }
   };
 
-  const handleAddReview = () => {
-    if (!loggedUser) {
-      navigate("/login");
-    } else {
-      // Navigate to the add review page or open a modal for adding a review
-      navigate(`/add-review/${albumInfo.id}`);
-    }
-  };
 
   const listatemas = albumInfo.tracklist.map((track, index) => <li key={index}>{track}</li>);
   const rating = albumInfo.reviews.length > 0 ? albumInfo.reviews.reduce((sum, obj) => sum + obj.rating, 0) / albumInfo.reviews.length : "No reviews yet";
@@ -68,16 +60,16 @@ function AlbumPage() {
 
               <h2 onClick={() => setModalShow(true)} className='rating'>{rating}</h2>
 
-      <ReviewList
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        reviews= {albumInfo.reviews}
-      />
+              <ReviewList
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                reviews={albumInfo.reviews}
+              />
             </div>
             <h2>${albumInfo.price}</h2>
-            <Button 
-              className='custom-button' 
-              variant="warning" 
+            <Button
+              className='custom-button'
+              variant="warning"
               onClick={handlePurchase}
               disabled={loading}
             >
