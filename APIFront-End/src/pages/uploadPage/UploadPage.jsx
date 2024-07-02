@@ -28,7 +28,7 @@ const UploadPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     // Validación de campos
     if (
       !name ||
@@ -42,7 +42,7 @@ const UploadPage = () => {
       mostrarAlerta("Faltan campos por completar", "warning", "Aceptar");
       return;
     }
-  
+
     // Construcción del objeto album
     const album = {
       name: name,
@@ -53,7 +53,7 @@ const UploadPage = () => {
       category: category,
       amount: amount,
     };
-  
+
     try {
       // Envío del formulario
       await fetch(API_URL, {
@@ -61,7 +61,7 @@ const UploadPage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(album),
       });
-  
+
       // Éxito: mostrar alerta y recargar página
       console.log(album);
       mostrarAlerta(
@@ -76,7 +76,7 @@ const UploadPage = () => {
       mostrarAlerta("Hubo un error al agregar el producto", "error", "Aceptar");
     }
   };
-  
+
   const mostrarAlerta = (text, icon, button) => {
     swal({
       text: text,
@@ -84,7 +84,6 @@ const UploadPage = () => {
       button: button,
     });
   };
-
 
   return (
     <div className="upload-page d-flex justify-content-center align-items-center">
@@ -127,6 +126,7 @@ const UploadPage = () => {
               />
             </Form.Group>
           </div>
+
           <div className="col-12">
             <Form.Group className="mb-3" controlId="formPrice">
               <Form.Label className="form-title">Price</Form.Label>
@@ -140,21 +140,21 @@ const UploadPage = () => {
             </Form.Group>
           </div>
           <div className="col-12">
-          <Form.Group className="mb-3" controlId="formCategory">
-        <Form.Label className="form-title">Category</Form.Label>
-        <Form.Control
-          as="select"
-          value={category}
-          onChange={(event) => setCategory(event.target.value)}
-          required
-        >
-          <option value="Rock">Rock</option>
-          <option value="Electronica">Electrónica</option>
-          <option value="Hip Hop">Hip Hop</option>
-          <option value="Pop">Pop</option>
-          <option value="Otros">Otros</option>
-        </Form.Control>
-      </Form.Group>
+            <Form.Group className="mb-3" controlId="formCategory">
+              <Form.Label className="form-title">Category</Form.Label>
+              <Form.Control
+                as="select"
+                value={category}
+                onChange={(event) => setCategory(event.target.value)}
+                required
+              >
+                <option value="Rock">Rock</option>
+                <option value="Electronica">Electrónica</option>
+                <option value="Hip Hop">Hip Hop</option>
+                <option value="Pop">Pop</option>
+                <option value="Otros">Otros</option>
+              </Form.Control>
+            </Form.Group>
           </div>
           <div className="col-12">
             <Form.Group className="mb-3" controlId="formAmount">
