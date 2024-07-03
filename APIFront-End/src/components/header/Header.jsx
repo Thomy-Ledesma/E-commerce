@@ -1,4 +1,4 @@
-import { Link, useNavigate, redirect} from "react-router-dom";
+import { Link, useNavigate, redirect } from "react-router-dom";
 import "./Header.css";
 import { useContext, useState } from "react";
 import { Context } from "../../context";
@@ -18,7 +18,7 @@ const Header = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    navigate("/")
+    navigate("/");
     if (searchTerm !== "") {
       const lowercasedSearchTerm = searchTerm.toLowerCase();
       const filtered = productList.filter(
@@ -38,15 +38,20 @@ const Header = () => {
   };
 
   const handleLogOut = () => {
-    setLoggedUser(null)
-    sessionStorage.removeItem('user')
-    navigate("/")
+    setLoggedUser(null);
+    sessionStorage.removeItem("user");
+    navigate("/");
     window.location.reload();
-  }
+  };
 
   return (
     <div className="container">
-      <Navbar expand="lg" sticky="top" className="text-white navbar" data-bs-theme="dark">
+      <Navbar
+        expand="lg"
+        sticky="top"
+        className="text-white navbar"
+        data-bs-theme="dark"
+      >
         <Container fluid>
           <Navbar.Brand
             as={Link}
@@ -97,42 +102,55 @@ const Header = () => {
                   Search
                 </Button>
               </Form>
-              {loggedUser? <Nav.Link as={Link} to="/uploadAlbum">
-                Subir Album
-              </Nav.Link> : null}
-              
+              {loggedUser ? (
+                <Nav.Link as={Link} to="/uploadAlbum">
+                  Subir Album
+                </Nav.Link>
+              ) : null}
             </Nav>
           </Navbar.Collapse>
-          {loggedUser ? <div className="custom-button">
-            <div className="d-flex gap-2">
-              <Button
-                variant="warning"
-                onClick={handleLogOut}
-              >
-                Log Out
-              </Button>
-              <h3>{userName}</h3>
+          {loggedUser ? (
+            <div className="custom-button">
+              <div className="d-flex gap-2">
+                <Button variant="warning" onClick={handleLogOut}>
+                  Log Out
+                </Button>
+                <h3>{userName}</h3>
+              </div>
             </div>
-          </div> : <div className="custom-button">
-            <div className="d-flex gap-2">
-              <Button
-                as={Link}
-                to="/Login"
-                variant="warning"
-                className="custom-button"
-              >
-                Login
-              </Button>
-              <Button
-                as={Link}
-                to="/Registrarse"
-                variant="warning"
-                className="custom-button"
-              >
-                Registrarse
-              </Button>
+          ) : (
+            <div className="custom-button">
+              <div className="d-flex gap-2">
+                <Button
+                  as={Link}
+                  to="/Login"
+                  variant="warning"
+                  className="custom-button"
+                >
+                  Login
+                </Button>
+                <Button
+                  as={Link}
+                  to="/Registrarse"
+                  variant="warning"
+                  className="custom-button"
+                >
+                  Registrarse
+                </Button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi-bi-app-indicator"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1z" />
+                  <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                </svg>
+              </div>
             </div>
-          </div>}
+          )}
         </Container>
       </Navbar>
     </div>
