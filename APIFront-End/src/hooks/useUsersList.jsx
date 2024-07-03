@@ -9,7 +9,7 @@ const useUsersList = () => {
     const fetchUsers = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://localhost:7051/users');
+        const response = await fetch('https://localhost:7051/users/listUsers');
         if (!response.ok) {
           throw new Error('Error fetching users');
         }
@@ -25,16 +25,7 @@ const useUsersList = () => {
     fetchUsers();
   }, []);
 
-  if (loading) return <p>Loading users...</p>;
-  if (error) return <p className="error">{error}</p>;
-
-  return (
-    <ul>
-      {users.map((user) => (
-        <li key={user.id}>{user.name} ({user.email})</li>
-      ))}
-    </ul>
-  );
+  return { users, loading, error };
 };
 
 export default useUsersList;

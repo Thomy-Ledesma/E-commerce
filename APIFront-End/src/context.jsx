@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 export const Context = createContext();
 const URL = "https://localhost:7051/products/";
@@ -33,4 +34,8 @@ export const ContextProvider = ({ children }) => {
       {children}
     </Context.Provider>
   );
+};
+
+ContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

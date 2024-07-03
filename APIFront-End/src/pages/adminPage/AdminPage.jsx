@@ -1,15 +1,15 @@
-import { useContext } from 'react';
-import { Context } from '../../context';
+// import { useContext } from 'react';
+// import { Context } from '../../context';
 import './AdminPage.css';
-import useProductsList from '../../hooks/useProductsList';
-import useUsersList from '../../hooks/useUsersList';
+import UsersList from '../../components/userList/UserList';
+import ProductsList from '../../components/productList/ProductList';
 
 const AdminPage = () => {
-  const { loggedUser } = useContext(Context);
+  // const { loggedUser } = useContext(Context);
 
-  if (!loggedUser || !loggedUser.isSuperAdmin) {
-    return <p>You do not have access to this page.</p>;
-  }
+  // if (!loggedUser || !loggedUser.isSuperAdmin) {
+  //   return <p>You do not have access to this page.</p>;
+  // }
 
   return (
     <div className="admin-page">
@@ -17,12 +17,12 @@ const AdminPage = () => {
 
       <div className="admin-section">
         <h2>Users</h2>
-        <useUsersList/>
+        <UsersList />
       </div>
 
       <div className="admin-section">
         <h2>Products</h2>
-        <useProductsList/>
+        <ProductsList />
       </div>
     </div>
   );

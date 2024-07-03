@@ -9,10 +9,10 @@ import FrontPage from './pages/FrontPage/FrontPage';
 import AlbumPage from './pages/AlbumPage/AlbumPage';
 import NotFound from './pages/NotFound/NotFound';
 import UploadPage from './pages/uploadPage/UploadPage';
-import AdminPage from './pages/adminPage/AdminPage';
 import Login from './pages/login/Login';
 import Footer from './components/footer/Footer'
 import SignUp from './pages/SignUp/SignUp';
+import AdminPage from './pages/adminPage/AdminPage';
 
 const App = () => {
   return (
@@ -26,7 +26,7 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
           <Route path="/uploadAlbum" element={<UploadPage />} />
           <Route path='/login' element={<Login />} />
-          <Route path='AdminPage' element={<AdminPage/>} />
+          <Route path='/adminPage' element={<AdminPage/>} />
           <Route path='/Registrarse' element={<SignUp />} />
         </Routes>
           <Footer/>

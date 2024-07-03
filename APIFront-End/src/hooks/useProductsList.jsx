@@ -9,7 +9,7 @@ const useProductsList = () => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://localhost:7051/products');
+        const response = await fetch('https://localhost:7051/products/listProducts');
         if (!response.ok) {
           throw new Error('Error fetching products');
         }
@@ -25,16 +25,7 @@ const useProductsList = () => {
     fetchProducts();
   }, []);
 
-  if (loading) return <p>Loading products...</p>;
-  if (error) return <p className="error">{error}</p>;
-
-  return (
-    <ul>
-      {products.map((product) => (
-        <li key={product.id}>{product.name} - ${product.price}</li>
-      ))}
-    </ul>
-  );
+  return { products, loading, error };
 };
 
 export default useProductsList;
