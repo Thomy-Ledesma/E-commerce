@@ -1,11 +1,14 @@
 import { useState } from 'react';
+import { useContext } from 'react';
+import { Context } from '../context';
 
 const useReview = () => {
+  const { loggedUser } = useContext(Context);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const purchaseAlbum = async (albumId, userId, rating, comments) => {
+  const makeReview = async (albumId, userId, rating, comments) => {
     setLoading(true);
     try {
       const response = await fetch('https://localhost:7051/products/addReview', {
@@ -28,7 +31,7 @@ const useReview = () => {
     }
   };
 
-  return [data, loading, error, purchaseAlbum];
+  return [data, loading, error, makeReview];
 };
 
 export default useReview;
