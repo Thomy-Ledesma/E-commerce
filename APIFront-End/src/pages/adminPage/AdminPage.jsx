@@ -1,29 +1,62 @@
-// import { useContext } from 'react';
-// import { Context } from '../../context';
-import './AdminPage.css';
-import UsersList from '../../components/userList/UserList';
-import ProductsList from '../../components/productList/ProductList';
+import { useState } from "react";
+import "./AdminPage.css";
+import UsersList from "../../components/userList/UserList";
+import ProductsList from "../../components/productList/ProductList";
+import { Button } from "react-bootstrap";
 
 const AdminPage = () => {
-  // const { loggedUser } = useContext(Context);
+  const [activeSection, setActiveSection] = useState("");
 
-  // if (!loggedUser || !loggedUser.isSuperAdmin) {
-  //   return <p>You do not have access to this page.</p>;
-  // }
+  const handleSectionChange = (section) => {
+    setActiveSection(section);
+  };
+
+  const handleBack = () => {
+    setActiveSection("");
+  };
 
   return (
     <div className="admin-page">
       <h1>Admin Dashboard</h1>
 
-      <div className="admin-section">
-        <h2>Users</h2>
-        <UsersList />
-      </div>
-
-      <div className="admin-section">
-        <h2>Products</h2>
-        <ProductsList />
-      </div>
+      {activeSection === "" ? (
+        <div className="admin-buttons">
+          <Button
+            variant="warning"
+            size="lg"
+            onClick={() => handleSectionChange("users")}
+          >
+            Users
+          </Button>
+          <Button
+            variant="warning"
+            size="lg"
+            onClick={() => handleSectionChange("products")}
+          >
+            Products
+          </Button>
+        </div>
+      ) : (
+        <>
+          <Button variant="warning" size="lg" onClick={handleBack}>
+            Back to Dashboard
+          </Button>
+          <div className="admin-section">
+            {activeSection === "users" && (
+              <>
+                <h2>Users</h2>
+                <UsersList />
+              </>
+            )}
+            {activeSection === "products" && (
+              <>
+                <h2>Products</h2>
+                <ProductsList />
+              </>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };

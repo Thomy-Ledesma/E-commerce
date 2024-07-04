@@ -6,6 +6,19 @@ using MongoDB.Bson;
 
 namespace EcommerceAPI.Controllers
 {
+
+    public class ProductUpdateRequest
+    {
+        public string Id { get; set; }
+        public string Band { get; set; }
+        public string Name { get; set; }
+        public List<string> Tracklist { get; set; }
+        public string URL { get; set; }
+        public double Price { get; set; }
+        public string Category { get; set; }
+        public int Amount { get; set; }
+    }
+
     public class PurchaseRequest
     {
         public string ProductId { get; set; }
@@ -301,27 +314,87 @@ namespace EcommerceAPI.Controllers
 
         [HttpDelete]
         [Route("deleteProduct")]
-        public dynamic DeleteProduct(string id)
+        public dynamic DeleteProduct([FromBody] dynamic data)
         {
             try
             {
+                string id = data.id.ToString();
                 var db = new MongoClient("mongodb://localhost:27017");
 
                 var database = db.GetDatabase("Ecommerce");
-                
-                var products = database.GetCollection<Product>("products");
-                
-                products.DeleteOne(a => a.Id == id);
-                    
-                return "Product deleted!";
 
+                var products = database.GetCollection<Product>("products");
+
+                products.DeleteOne(a => a.Id == id);
+
+                return "Product deleted!";
             }
             catch (Exception)
             {
                 return "Product not found";
             }
         }
+
+
+
+        [HttpPatch]
+        [Route("updateProduct")]
+        public dynamic UpdateProduct([FromBody] ProductUpdateRequest request)
+        {
+            var db = new MongoClient("mongodb://localhost:27017");
+
+            var database = db.GetDatabase("Ecommerce");
+
+            var products = database.GetCollection<Product>("products");
+
+            var filter = Builders<Product>.Filter.Eq(p => p.Id, request.Id);
+
+            var updateDefinition = new List<UpdateDefinition<Product>>();
+
+            if (request.Band != null)
+            {
+                updateDefinition.Add(Builders<Product>.Update.Set(p => p.Band, request.Band));
+            }
+            if (request.Name != null)
+            {
+                updateDefinition.Add(Builders<Product>.Update.Set(p => p.Name, request.Name));
+            }
+            if (request.Tracklist != null)
+            {
+                updateDefinition.Add(Builders<Product>.Update.Set(p => p.Tracklist, request.Tracklist));
+            }
+            if (request.URL != null)
+            {
+                updateDefinition.Add(Builders<Product>.Update.Set(p => p.PhotoURL, request.URL));
+            }
+            if (request.Price != default(double))
+            {
+                updateDefinition.Add(Builders<Product>.Update.Set(p => p.Price, request.Price));
+            }
+            if (request.Category != null)
+            {
+                updateDefinition.Add(Builders<Product>.Update.Set(p => p.Category, new List<string> { request.Category }));
+            }
+            if (request.Amount != default(int))
+            {
+                updateDefinition.Add(Builders<Product>.Update.Set(p => p.Amount, request.Amount));
+            }
+
+            var update = Builders<Product>.Update.Combine(updateDefinition);
+
+            var result = products.UpdateOne(filter, update);
+
+            if (result.ModifiedCount > 0)
+            {
+                return "Product was successfully updated";
+            }
+            else
+            {
+                return "Product not found or no changes made";
+            }
+        }
     }
+
 }
 
 /*cambiar clases y parametros en ruta productos*/ 

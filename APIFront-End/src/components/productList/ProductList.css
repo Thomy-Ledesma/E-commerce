@@ -1,0 +1,27 @@
+/* ProductList.css */
+.products-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.admin-product-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: white;
+  color: black;
+}
+
+.admin-product-item h3 {
+  margin: 0;
+}
+
+.admin-product-item p {
+  margin: 5px 0;
+}
+
+.admin-product-item button {
+  margin-right: 5px;
+}

@@ -1,10 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
-const useProductsList = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
+const useProductsList = (setProducts, setLoading, setError) => {
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
@@ -23,9 +19,7 @@ const useProductsList = () => {
     };
 
     fetchProducts();
-  }, []);
-
-  return { products, loading, error };
+  }, [setProducts, setLoading, setError]);
 };
 
 export default useProductsList;
