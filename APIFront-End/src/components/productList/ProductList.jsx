@@ -8,14 +8,27 @@ const ProductsList = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [currentProduct, setCurrentProduct] = useState(null);
+  const [currentProduct, setCurrentProduct] = useState({
+    id: "",
+    name: "",
+    band: "",
+    price: 0,
+    amount: 0
+  });
 
   useProductsList(setProducts, setLoading, setError);
 
   const handleEdit = (product) => {
-    setCurrentProduct(product);
-    setShowModal(true);
-  };
+  setCurrentProduct({
+    id: product.id,
+    name: product.name || "",
+    band: product.band || "",
+    price: product.price || 0,
+    amount: product.amount || 0,
+    // Add other fields as necessary
+  });
+  setShowModal(true);
+};
 
   const handleDelete = async (productId) => {
     try {
@@ -30,7 +43,7 @@ const ProductsList = () => {
         throw new Error('Error deleting product');
       }
       setProducts((prevProducts) => prevProducts.filter((product) => product.id !== productId));
-      console.log("Deleted album with ID:", productId);
+      console.log("Deleted product with ID:", productId);
     } catch (error) {
       console.error("Error deleting product:", error);
     }
@@ -38,12 +51,61 @@ const ProductsList = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setCurrentProduct(null);
+    setCurrentProduct({
+      id: "",
+      name: "",
+      band: "",
+      price: 0,
+      amount: 0
+    });
   };
 
-  const handleSaveChanges = () => {
-    console.log("Saving changes for:", currentProduct);
-    handleCloseModal();
+  const handleSaveChanges = async () => {
+    try {
+      console.log("Saving changes for:", currentProduct);
+  
+      if (!currentProduct || !currentProduct.id) {
+        throw new Error('Invalid product data');
+      }
+  
+      const response = await fetch('https://localhost:7051/products/updateProduct', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(currentProduct),
+      });
+  
+      console.log("Response status:", response.status);
+      const responseBody = await response.text();
+      console.log("Response body:", responseBody);
+  
+      if (!response.ok) {
+        throw new Error('Error updating product');
+      }
+  
+      const updatedProduct = JSON.parse(responseBody).product;
+      console.log("Updated product response:", updatedProduct);
+  
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.id === currentProduct.id ? updatedProduct : product
+        )
+      );
+  
+      handleCloseModal();
+      console.log("Updated product with ID:", currentProduct.id);
+    } catch (error) {
+      console.error("Error updating product:", error);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCurrentProduct({
+      ...currentProduct,
+      [name]: name === "price" || name === "amount" ? parseFloat(value) : value,
+    });
   };
 
   if (loading) return <p>Loading products...</p>;
@@ -61,7 +123,7 @@ const ProductsList = () => {
             <Button variant="warning" onClick={() => handleEdit(product)}>
               Edit
             </Button>
-            <Button variant="warning" onClick={() => handleDelete(product.id)}>
+            <Button variant="danger" onClick={() => handleDelete(product.id)}>
               Delete
             </Button>
           </div>
@@ -73,62 +135,44 @@ const ProductsList = () => {
           <Modal.Title>Edit Product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {currentProduct && (
-            <Form>
-              <Form.Group controlId="formProductName">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={String(currentProduct.name)}
-                  onChange={(e) =>
-                    setCurrentProduct({
-                      ...currentProduct,
-                      name: e.target.value,
-                    })
-                  }
-                />
-              </Form.Group>
-              <Form.Group controlId="formProductBand">
-                <Form.Label>Band</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={String(currentProduct.band)}
-                  onChange={(e) =>
-                    setCurrentProduct({
-                      ...currentProduct,
-                      band: e.target.value,
-                    })
-                  }
-                />
-              </Form.Group>
-              <Form.Group controlId="formProductPrice">
-                <Form.Label>Price</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={String(currentProduct.price)}
-                  onChange={(e) =>
-                    setCurrentProduct({
-                      ...currentProduct,
-                      price: e.target.value,
-                    })
-                  }
-                />
-              </Form.Group>
-              <Form.Group controlId="formProductAmount">
-                <Form.Label>Amount</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={String(currentProduct.amount)}
-                  onChange={(e) =>
-                    setCurrentProduct({
-                      ...currentProduct,
-                      amount: e.target.value,
-                    })
-                  }
-                />
-              </Form.Group>
-            </Form>
-          )}
+          <Form>
+            <Form.Group controlId="formProductName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={currentProduct.name}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formProductBand">
+              <Form.Label>Band</Form.Label>
+              <Form.Control
+                type="text"
+                name="band"
+                value={currentProduct.band}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formProductPrice">
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                type="number"
+                name="price"
+                value={currentProduct.price}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formProductAmount">
+              <Form.Label>Amount</Form.Label>
+              <Form.Control
+                type="number"
+                name="amount"
+                value={currentProduct.amount}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>

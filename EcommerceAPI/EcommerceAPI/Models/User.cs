@@ -5,7 +5,7 @@ namespace EcommerceAPI.Models
 {
     public class User
     {
-        public User(string password, string name, string email) 
+        public User(string password, string name, string email, int userType = 0) 
         {
             Email = email;
             Name = name;
@@ -13,7 +13,7 @@ namespace EcommerceAPI.Models
             Wishlist = [];
             Cart = [];
             Purchased = [];
-            UserType = 0;
+            UserType = userType;
         }
         
         [BsonId]

@@ -339,58 +339,76 @@ namespace EcommerceAPI.Controllers
 
         [HttpPatch]
         [Route("updateProduct")]
-        public dynamic UpdateProduct([FromBody] ProductUpdateRequest request)
+        public IActionResult UpdateProduct([FromBody] ProductUpdateRequest request)
         {
-            var db = new MongoClient("mongodb://localhost:27017");
-
-            var database = db.GetDatabase("Ecommerce");
-
-            var products = database.GetCollection<Product>("products");
-
-            var filter = Builders<Product>.Filter.Eq(p => p.Id, request.Id);
-
-            var updateDefinition = new List<UpdateDefinition<Product>>();
-
-            if (request.Band != null)
+            if (request == null || string.IsNullOrEmpty(request.Id))
             {
-                updateDefinition.Add(Builders<Product>.Update.Set(p => p.Band, request.Band));
-            }
-            if (request.Name != null)
-            {
-                updateDefinition.Add(Builders<Product>.Update.Set(p => p.Name, request.Name));
-            }
-            if (request.Tracklist != null)
-            {
-                updateDefinition.Add(Builders<Product>.Update.Set(p => p.Tracklist, request.Tracklist));
-            }
-            if (request.URL != null)
-            {
-                updateDefinition.Add(Builders<Product>.Update.Set(p => p.PhotoURL, request.URL));
-            }
-            if (request.Price != default(double))
-            {
-                updateDefinition.Add(Builders<Product>.Update.Set(p => p.Price, request.Price));
-            }
-            if (request.Category != null)
-            {
-                updateDefinition.Add(Builders<Product>.Update.Set(p => p.Category, new List<string> { request.Category }));
-            }
-            if (request.Amount != default(int))
-            {
-                updateDefinition.Add(Builders<Product>.Update.Set(p => p.Amount, request.Amount));
+                return BadRequest("Invalid request data");
             }
 
-            var update = Builders<Product>.Update.Combine(updateDefinition);
-
-            var result = products.UpdateOne(filter, update);
-
-            if (result.ModifiedCount > 0)
+            try
             {
-                return "Product was successfully updated";
+                var db = new MongoClient("mongodb://localhost:27017");
+                var database = db.GetDatabase("Ecommerce");
+                var products = database.GetCollection<Product>("products");
+
+                var filter = Builders<Product>.Filter.Eq(p => p.Id, request.Id);
+                var updateDefinition = new List<UpdateDefinition<Product>>();
+
+                if (request.Band != null)
+                {
+                    updateDefinition.Add(Builders<Product>.Update.Set(p => p.Band, request.Band));
+                }
+                if (request.Name != null)
+                {
+                    updateDefinition.Add(Builders<Product>.Update.Set(p => p.Name, request.Name));
+                }
+                if (request.Tracklist != null)
+                {
+                    updateDefinition.Add(Builders<Product>.Update.Set(p => p.Tracklist, request.Tracklist));
+                }
+                if (request.URL != null)
+                {
+                    updateDefinition.Add(Builders<Product>.Update.Set(p => p.PhotoURL, request.URL));
+                }
+                if (request.Price != default(double))
+                {
+                    updateDefinition.Add(Builders<Product>.Update.Set(p => p.Price, request.Price));
+                }
+                if (request.Category != null)
+                {
+                    updateDefinition.Add(Builders<Product>.Update.Set(p => p.Category, new List<string> { request.Category }));
+                }
+                if (request.Amount != default(int))
+                {
+                    updateDefinition.Add(Builders<Product>.Update.Set(p => p.Amount, request.Amount));
+                }
+
+                if (updateDefinition.Count == 0)
+                {
+                    return BadRequest("No fields to update");
+                }
+
+                var update = Builders<Product>.Update.Combine(updateDefinition);
+
+                // Log the filter and update definitions
+                Console.WriteLine($"Filter: {filter}");
+                Console.WriteLine($"Update: {update}");
+
+                var result = products.UpdateOne(filter, update);
+
+                if (result.ModifiedCount > 0)
+                {
+                    return Ok(new { message = "Product was successfully updated", product = request });
+                }
+                else
+                {
+                    return NotFound("Product not found or no changes made");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return "Product not found or no changes made";
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
     }
