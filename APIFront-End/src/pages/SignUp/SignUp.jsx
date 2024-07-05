@@ -58,7 +58,7 @@ const SignUp = ({ onSuccess }) => {
   return (
     <div className="upload-page d-flex justify-content-center align-items-center">
       <Form className="upload-form" onSubmit={handleSubmit}>
-        <h2 className="text-center mb-4 text-white">Sign up to DiscoManiacos</h2>
+        <h2 className="text-center mb-4 text-white">{loggedUser?.userType == 2 ? "Create Admin" : "Sign up to DiscoManiacos"}</h2>
         <Form.Group className="mb-3" controlId="formUserName">
           <Form.Label className="form-title">Username</Form.Label>
           <Form.Control

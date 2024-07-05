@@ -133,17 +133,17 @@ const Header = () => {
                 <Button variant="warning" onClick={handleLogOut}>
                   Log Out
                 </Button>
-                <h3>{userName}</h3>
                 {loggedUser.userType === 2 && (
                   <Button
                     as={Link}
-                    to="/createAdmin"
+                    to="/Registrarse"
                     variant="warning"
                     className="custom-button"
                   >
                     Create Admin
                   </Button>
                 )}
+                <h3>{userName}</h3>
               </div>
             </div>
           ) : (
