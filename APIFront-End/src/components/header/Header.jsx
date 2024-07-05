@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useContext, useState } from "react";
 import { Context } from "../../context";
+import { CartContext } from "../../components/cart/CartContext";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -10,8 +11,8 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 const Header = () => {
-  const { loggedUser, setLoggedUser, productList, setFilteredProductList } =
-    useContext(Context);
+  const { loggedUser, setLoggedUser, productList, setFilteredProductList } = useContext(Context);
+  const { cart } = useContext(CartContext);
   const userName = loggedUser?.name || "";
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -46,31 +47,14 @@ const Header = () => {
 
   return (
     <div className="container">
-      <Navbar
-        expand="lg"
-        sticky="top"
-        className="text-white navbar"
-        data-bs-theme="dark"
-      >
+      <Navbar expand="lg" sticky="top" className="text-white navbar" data-bs-theme="dark">
         <Container fluid>
-          <Navbar.Brand
-            as={Link}
-            to="/"
-            onClick={() => setFilteredProductList(productList)}
-          >
-            <img
-              src="public/src/logo-discomaniacos.jpeg"
-              alt="Logo"
-              height="100"
-            />
+          <Navbar.Brand as={Link} to="/" onClick={() => setFilteredProductList(productList)}>
+            <img src="public/src/logo-discomaniacos.jpeg" alt="Logo" height="100" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
-            <Nav
-              className="me-auto my-2 my-lg-0"
-              style={{ maxHeight: "100px" }}
-              navbarScroll
-            >
+            <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
               <NavDropdown title="Categorias" id="navbarScrollingDropdown">
                 <NavDropdown.Item onClick={() => handleCategory("Electronica")}>
                   Electrónica
@@ -89,7 +73,6 @@ const Header = () => {
                   Otros
                 </NavDropdown.Item>
               </NavDropdown>
-
               <Form className="d-flex" onSubmit={handleSubmit}>
                 <Form.Control
                   type="search"
@@ -110,13 +93,13 @@ const Header = () => {
             </Nav>
           </Navbar.Collapse>
           <Button
-            as=""
-            to="/"
+            as={Link}
+            to="/cart"
             variant="warning"
             className="custom-button-cart"
             style={{ paddingRight: "20px" }}
           >
-            Cart
+            Cart ({cart.length})
           </Button>
           <Button
             as={Link}
@@ -134,12 +117,7 @@ const Header = () => {
                   Log Out
                 </Button>
                 {loggedUser.userType === 2 && (
-                  <Button
-                    as={Link}
-                    to="/Registrarse"
-                    variant="warning"
-                    className="custom-button"
-                  >
+                  <Button as={Link} to="/Registrarse" variant="warning" className="custom-button">
                     Create Admin
                   </Button>
                 )}
@@ -149,20 +127,10 @@ const Header = () => {
           ) : (
             <div className="custom-button">
               <div className="d-flex gap-2">
-                <Button
-                  as={Link}
-                  to="/Login"
-                  variant="warning"
-                  className="custom-button"
-                >
+                <Button as={Link} to="/Login" variant="warning" className="custom-button">
                   Login
                 </Button>
-                <Button
-                  as={Link}
-                  to="/Registrarse"
-                  variant="warning"
-                  className="custom-button"
-                >
+                <Button as={Link} to="/Registrarse" variant="warning" className="custom-button">
                   Registrarse
                 </Button>
               </div>

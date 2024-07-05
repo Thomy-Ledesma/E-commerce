@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { ContextProvider } from './context'; // Import the context provider
+import { CartProvider } from "./components/cart/CartContext";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -13,10 +14,12 @@ import Login from './pages/login/Login';
 import Footer from './components/footer/Footer'
 import SignUp from './pages/SignUp/SignUp';
 import AdminPage from './pages/adminPage/AdminPage';
+import Cart from './components/cart/Cart';
 
 const App = () => {
   return (
     <ContextProvider>  {/* Use the context provider */}
+      <CartProvider>
       <div className='principal-page'>
         <Navbar />
         <Routes>
@@ -28,9 +31,11 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/adminPage' element={<AdminPage/>} />
           <Route path='/Registrarse' element={<SignUp />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
           <Footer/>
       </div>
+      </CartProvider>
     </ContextProvider>
   );
 };

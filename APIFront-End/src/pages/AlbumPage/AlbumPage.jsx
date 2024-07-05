@@ -5,11 +5,13 @@ import ReviewList from '../../components/reviewList/ReviewList';
 import Button from 'react-bootstrap/Button';
 import { Context } from '../../context';
 import usePurchaseAlbum from '../../hooks/usePurchaseAlbum';
+import { CartContext } from '../../components/cart/CartContext';
 
 const URL = "https://localhost:7051/products/GetAlbum?id=";
 
 function AlbumPage() {
   const navigate = useNavigate();
+  const { addToCart} = useContext(CartContext);
   const { loggedUser } = useContext(Context);
   const params = useParams();
   const [albumInfo, setAlbumInfo] = useState({

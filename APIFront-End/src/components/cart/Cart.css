@@ -1,14 +1,29 @@
 .cart {
-    padding: 20px;
-  }
+  padding: 20px;
+}
+
+.cart-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cart-item {
+  width: 200px;
+}
+
+.cart-page {
+  height: 125vh;
+}
+
+.text-card {
+  color: white;
+}
+
+.white-text {
+  color: white;
+}
+
+.text-center mb-4 {
   
-  .cart-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .cart-item {
-    width: 200px;
-  }
-  
+}
