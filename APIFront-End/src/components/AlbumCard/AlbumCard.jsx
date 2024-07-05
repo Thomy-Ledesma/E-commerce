@@ -1,16 +1,16 @@
 import { Card, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
+// import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { CartContext } from "../../components/cart/CartContext";
+// import { CartContext } from "../../components/cart/CartContext";
 import "./AlbumCard.css";
 
 const AlbumCard = (props) => {
-  const { setAlbumToAdd } = useContext(CartContext);
+  // const { setAlbumToAdd } = useContext(CartContext);
   const navigate = useNavigate();
 
   const handleBuyClick = () => {
-    setAlbumToAdd(props.album);
+    // setAlbumToAdd(props.album);
     navigate(`/album/${props.album["id"]}`);
   };
 

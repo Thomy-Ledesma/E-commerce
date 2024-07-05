@@ -11,7 +11,7 @@ const URL = "https://localhost:7051/products/GetAlbum?id=";
 
 function AlbumPage() {
   const navigate = useNavigate();
-  const { addToCart} = useContext(CartContext);
+  const { addToCart, albumToAdd, setAlbumToAdd } = useContext(CartContext);
   const { loggedUser } = useContext(Context);
   const params = useParams();
   const [albumInfo, setAlbumInfo] = useState({
@@ -20,7 +20,7 @@ function AlbumPage() {
   });
   const [modalShow, setModalShow] = useState(false);
 
-  const [purchaseData, loading, purchaseError, purchaseAlbum] = usePurchaseAlbum();
+  const [purchaseData, loading, purchaseError] = usePurchaseAlbum();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,14 +32,21 @@ function AlbumPage() {
     fetchData();
   }, [params.albumId]);
 
+  useEffect(() => {
+    if (albumToAdd && albumToAdd.id === params.albumId) {
+      addToCart(albumToAdd);
+      setAlbumToAdd(null); // Clear the albumToAdd after adding to cart
+    }
+  }, [albumToAdd, addToCart, params.albumId, setAlbumToAdd]);
+
   const handlePurchase = () => {
     if (!loggedUser) {
       navigate("/login");
     } else {
-      purchaseAlbum(albumInfo.id, loggedUser.id);
+      setAlbumToAdd(albumInfo);
+      // purchaseAlbum(albumInfo.id, loggedUser.id); /usar en Cart
     }
   };
-
 
   const listatemas = albumInfo.tracklist.map((track, index) => <li key={index}>{track}</li>);
   const rating = albumInfo.reviews.length > 0 ? albumInfo.reviews.reduce((sum, obj) => sum + obj.rating, 0) / albumInfo.reviews.length : "No reviews yet";
@@ -59,9 +66,7 @@ function AlbumPage() {
               <ol>{listatemas}</ol>
             </div>
             <div className='rating-container' style={{ display: 'flex', alignItems: 'center' }}>
-
               <h2 onClick={() => setModalShow(true)} className='rating'>{rating}</h2>
-
               <ReviewList
                 show={modalShow}
                 onHide={() => setModalShow(false)}
@@ -85,5 +90,7 @@ function AlbumPage() {
     </>
   );
 }
+
+
 
 export default AlbumPage;
