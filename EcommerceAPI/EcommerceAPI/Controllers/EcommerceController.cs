@@ -29,6 +29,7 @@ namespace EcommerceAPI.Controllers
         public string Name { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
+        public int UserType { get; set; } = 0;
     }
     public class ProductRequest
     {
@@ -89,7 +90,8 @@ namespace EcommerceAPI.Controllers
                 var client = new User(
                 password: request.Password,
                 name: request.Name,
-                email: request.Email
+                email: request.Email,
+                userType: request.UserType
                 );
 
             var db = new MongoClient("mongodb://localhost:27017");
@@ -153,7 +155,7 @@ namespace EcommerceAPI.Controllers
 
         [HttpDelete]
         [Route("deleteUser")]
-        public dynamic DeleteClient(string name, string id)
+        public dynamic DeleteClient(string id)
         {
             try
             {
@@ -163,9 +165,9 @@ namespace EcommerceAPI.Controllers
                 
                 var clients = database.GetCollection<User>("users");
                 
-                clients.DeleteOne(a => a.Id == id && a.Name == name);
+                clients.DeleteOne(a => a.Id == id);
                 
-                return "user " + name + " was succesfully deleted";
+                return "user was succesfully deleted";
 
             }
             catch (Exception)
