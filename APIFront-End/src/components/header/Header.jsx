@@ -1,4 +1,5 @@
-import { Link, useNavigate, redirect } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+// import { redirect } from "react-router-dom"; NO SE LEE EN EL COMPONENTE
 import "./Header.css";
 import { useContext, useState } from "react";
 import { Context } from "../../context";
@@ -109,6 +110,24 @@ const Header = () => {
               ) : null}
             </Nav>
           </Navbar.Collapse>
+          <Button
+            as=""
+            to="/"
+            variant="warning"
+            className="custom-button-cart"
+            style={{ paddingRight: '20px' }}
+          >
+            Cart
+          </Button>
+          <Button
+            as={Link}
+            to="/adminPage"
+            variant="warning"
+            className="custom-button-cart"
+            style={{ paddingRight: '20px' }}
+          >
+            Admin
+          </Button>
           {loggedUser ? (
             <div className="custom-button">
               <div className="d-flex gap-2">
@@ -137,7 +156,6 @@ const Header = () => {
                 >
                   Registrarse
                 </Button>
-
               </div>
             </div>
           )}

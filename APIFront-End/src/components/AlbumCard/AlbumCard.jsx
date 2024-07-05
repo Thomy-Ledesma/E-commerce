@@ -9,7 +9,7 @@ const AlbumCard = (props) => {
       <Card.Img variant="top" src={`${props.album["photoURL"]}`} />
       <Card.Body>
         <Card.Title className="album-card-title">{props.album.band}</Card.Title>
-        <Card.Subtitle className="album-card-title color-black" >
+        <Card.Subtitle className="album-card-title color-black">
           {props.album.name}
         </Card.Subtitle>
 

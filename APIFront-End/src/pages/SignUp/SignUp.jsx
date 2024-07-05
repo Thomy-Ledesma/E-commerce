@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import PropTypes from 'prop-types';
 
 const API_URL = "https://localhost:7051/users/addUser";
 
-const SignUp = () => {
+const SignUp = ({ onSuccess }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +39,12 @@ const SignUp = () => {
 
       const data = await response.json();
       console.log('User added:', data);
-      window.location.reload();
+      onSuccess && onSuccess(data);
+      setName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      setErrorMessage("");
     } catch (error) {
       console.error("There was an error adding the user!", error);
       setErrorMessage("There was an error adding the user! Please try again.");
@@ -99,6 +105,10 @@ const SignUp = () => {
       </Form>
     </div>
   );
+};
+
+SignUp.propTypes = {
+  onSuccess: PropTypes.func,
 };
 
 export default SignUp;

@@ -1,18 +1,25 @@
 import { useState } from "react";
 import "./AdminPage.css";
-import UsersList from "../../components/userList/UserList";
+import UserList from "../../components/userList/UserList";
 import ProductsList from "../../components/productList/ProductList";
 import { Button } from "react-bootstrap";
 
 const AdminPage = () => {
   const [activeSection, setActiveSection] = useState("");
+  const [activeUserSection, setActiveUserSection] = useState("");
 
   const handleSectionChange = (section) => {
     setActiveSection(section);
+    setActiveUserSection(""); // Reset user section
+  };
+
+  const handleUserSectionChange = (section) => {
+    setActiveUserSection(section);
   };
 
   const handleBack = () => {
     setActiveSection("");
+    setActiveUserSection("");
   };
 
   return (
@@ -45,7 +52,26 @@ const AdminPage = () => {
             {activeSection === "users" && (
               <>
                 <h2>Users</h2>
-                <UsersList />
+                {activeUserSection === "" ? (
+                  <div className="admin-buttons">
+                    <Button
+                      variant="warning"
+                      size="lg"
+                      onClick={() => handleUserSectionChange("addUser")}
+                    >
+                      Alta de Usuario
+                    </Button>
+                    <Button
+                      variant="warning"
+                      size="lg"
+                      onClick={() => handleUserSectionChange("listUsers")}
+                    >
+                      Listado de Usuarios
+                    </Button>
+                  </div>
+                ) : (
+                  <UserList activeUserSection={activeUserSection} />
+                )}
               </>
             )}
             {activeSection === "products" && (

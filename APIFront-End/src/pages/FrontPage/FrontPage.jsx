@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { Context } from "../../context";
 // import AlbumCard from '../../components/AlbumCard/AlbumCard';

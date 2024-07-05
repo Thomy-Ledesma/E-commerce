@@ -1,0 +1,14 @@
+.cart {
+    padding: 20px;
+  }
+  
+  .cart-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .cart-item {
+    width: 200px;
+  }
+  

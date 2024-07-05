@@ -55,7 +55,7 @@ const Login = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit" disabled={loading}>
+        <Button variant="warning" type="submit" disabled={loading}>
           {loading ? 'Logging in...' : 'Log In'}
         </Button>
         {error && <p className="text-danger">{error}</p>}
