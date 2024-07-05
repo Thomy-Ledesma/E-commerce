@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import PropTypes from 'prop-types';
+import { Context } from "../../context";
 
 const API_URL = "https://localhost:7051/users/addUser";
 
 const SignUp = ({ onSuccess }) => {
+  const {loggedUser} = useContext(Context)
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,10 +23,12 @@ const SignUp = ({ onSuccess }) => {
     }
 
     try {
+      const admin = loggedUser?.userType == 2 ? 1 : 0
       const user = {
         name: name,
         password: password,
-        email: email
+        email: email,
+        userType: admin,
       };
       const response = await fetch(API_URL, {
         method: "POST",

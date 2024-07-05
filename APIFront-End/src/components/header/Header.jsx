@@ -1,5 +1,4 @@
-import { Link, useNavigate} from "react-router-dom";
-// import { redirect } from "react-router-dom"; NO SE LEE EN EL COMPONENTE
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useContext, useState } from "react";
 import { Context } from "../../context";
@@ -115,7 +114,7 @@ const Header = () => {
             to="/"
             variant="warning"
             className="custom-button-cart"
-            style={{ paddingRight: '20px' }}
+            style={{ paddingRight: "20px" }}
           >
             Cart
           </Button>
@@ -124,7 +123,7 @@ const Header = () => {
             to="/adminPage"
             variant="warning"
             className="custom-button-cart"
-            style={{ paddingRight: '20px' }}
+            style={{ paddingRight: "20px" }}
           >
             Admin
           </Button>
@@ -135,6 +134,16 @@ const Header = () => {
                   Log Out
                 </Button>
                 <h3>{userName}</h3>
+                {loggedUser.userType === 2 && (
+                  <Button
+                    as={Link}
+                    to="/createAdmin"
+                    variant="warning"
+                    className="custom-button"
+                  >
+                    Create Admin
+                  </Button>
+                )}
               </div>
             </div>
           ) : (
