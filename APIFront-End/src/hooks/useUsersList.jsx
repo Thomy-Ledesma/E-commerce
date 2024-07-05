@@ -46,8 +46,9 @@ const useUsersList = () => {
 
   const deleteUser = async (userId) => {
     try {
-      const response = await fetch(`https://localhost:7051/users/deleteUser/${userId}`, {
+      const response = await fetch(`https://localhost:7051/users/deleteUser?id=${userId}`, {
         method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
       });
       if (!response.ok) {
         throw new Error('Error deleting user');
