@@ -21,7 +21,7 @@ namespace EcommerceAPI.Controllers
 
     public class PurchaseRequest
     {
-        public string ProductId { get; set; }
+        public List<string> ProductIds { get; set; }
         public string UserId { get; set; }
     }
     public class UserRequest
@@ -100,7 +100,7 @@ namespace EcommerceAPI.Controllers
 
             clients.InsertOne(client);
 
-                return Ok("User " + request.Name + " was successfully added"); 
+                return Ok(new {messsage = "User " + request.Name + " was successfully added" }); 
             }
             catch (Exception)
             {
@@ -109,8 +109,8 @@ namespace EcommerceAPI.Controllers
         }
 
         [HttpPost]
-        [Route("purchaseAlbum")]
-        public IActionResult PurchaseAlbum([FromBody] PurchaseRequest request)
+        [Route("purchaseAlbums")]
+        public IActionResult PurchaseAlbums([FromBody] PurchaseRequest request)
         {
             var db = new MongoClient("mongodb://localhost:27017");
             var database = db.GetDatabase("Ecommerce");
@@ -118,39 +118,53 @@ namespace EcommerceAPI.Controllers
             var products = database.GetCollection<Product>("products");
             var users = database.GetCollection<User>("users");
 
-            var productFilter = Builders<Product>.Filter.Eq("_id", ObjectId.Parse(request.ProductId));
             var userFilter = Builders<User>.Filter.Eq("_id", ObjectId.Parse(request.UserId));
-
-            var product = products.Find(productFilter).FirstOrDefault();
             var user = users.Find(userFilter).FirstOrDefault();
-
-            if (product == null)
-            {
-                return NotFound(new { message = "Product not found" });
-            }
 
             if (user == null)
             {
                 return NotFound(new { message = "User not found" });
             }
 
-            // Update the amount of the product
-            var updateAmount = Builders<Product>.Update.Inc("amount", -1);
-            products.UpdateOne(productFilter, updateAmount);
+            var purchasedProducts = new List<string>();
+            var notFoundProducts = new List<string>();
+            var insufficientStockProducts = new List<string>();
 
-            // Check the updated amount
-            product = products.Find(productFilter).FirstOrDefault();
-            if (product.Amount == 0)
+            foreach (var productId in request.ProductIds)
             {
-                // Delete the product if amount is 0
-                products.DeleteOne(productFilter);
+                var productFilter = Builders<Product>.Filter.Eq("_id", ObjectId.Parse(productId));
+                var product = products.Find(productFilter).FirstOrDefault();
+
+                if (product == null)
+                {
+                    notFoundProducts.Add(productId);
+                    continue;
+                }
+
+                if (product.Amount <= 0)
+                {
+                    insufficientStockProducts.Add(productId);
+                    continue;
+                }
+
+                // Update the amount of the product
+                var updateAmount = Builders<Product>.Update.Inc("amount", -1);
+                products.UpdateOne(productFilter, updateAmount);
+
+                // Add the product to the user's purchased array
+                var updateUser = Builders<User>.Update.Push("purchased", productId);
+                users.UpdateOne(userFilter, updateUser);
+
+                purchasedProducts.Add(productId);
             }
 
-            // Add the product to the user's purchased array
-            var updateUser = Builders<User>.Update.Push("purchased", request.ProductId);
-            users.UpdateOne(userFilter, updateUser);
-
-            return Ok(new { message = "Album purchased successfully" });
+            return Ok(new
+            {
+                message = "Purchase process completed",
+                purchasedProducts = purchasedProducts,
+                notFoundProducts = notFoundProducts,
+                insufficientStockProducts = insufficientStockProducts
+            });
         }
 
         [HttpDelete]

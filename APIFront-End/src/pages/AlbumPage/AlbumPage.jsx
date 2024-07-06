@@ -78,12 +78,9 @@ function AlbumPage() {
               className='custom-button'
               variant="warning"
               onClick={handlePurchase}
-              disabled={loading}
             >
-              {loading ? 'Processing...' : 'Buy'}
+              Add to Cart
             </Button>
-            {purchaseError && <p className="text-danger">{purchaseError}</p>}
-            {purchaseData && <p className="text-success">Purchase successful!</p>}
           </div>
         </div>
       </div>

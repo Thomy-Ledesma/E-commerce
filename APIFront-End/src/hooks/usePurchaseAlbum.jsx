@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
-const usePurchaseAlbum = () => {
+const usePurchaseAlbums = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const purchaseAlbum = async (albumId, userId) => {
+  const purchaseAlbums = async (albumIds, userId) => {
     setLoading(true);
     try {
-      const response = await fetch('https://localhost:7051/users/purchaseAlbum', {
+      const response = await fetch('https://localhost:7051/users/purchaseAlbums', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ProductId: albumId, UserId: userId }),
+        body: JSON.stringify({ ProductIds: albumIds, UserId: userId }),
       });
 
       if (!response.ok) {
@@ -28,7 +28,7 @@ const usePurchaseAlbum = () => {
     }
   };
 
-  return [data, loading, error, purchaseAlbum];
+  return [data, loading, error, purchaseAlbums];
 };
 
-export default usePurchaseAlbum;
+export default usePurchaseAlbums;

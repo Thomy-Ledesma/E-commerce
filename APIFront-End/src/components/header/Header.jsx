@@ -85,11 +85,6 @@ const Header = () => {
                   Search
                 </Button>
               </Form>
-              {loggedUser ? (
-                <Nav.Link as={Link} to="/uploadAlbum">
-                  Subir Album
-                </Nav.Link>
-              ) : null}
             </Nav>
           </Navbar.Collapse>
           <Button
@@ -101,25 +96,22 @@ const Header = () => {
           >
             Cart ({cart.length})
           </Button>
-          <Button
-            as={Link}
-            to="/adminPage"
-            variant="warning"
-            className="custom-button-cart"
-            style={{ paddingRight: "20px" }}
-          >
-            Admin
-          </Button>
           {loggedUser ? (
             <div className="custom-button">
               <div className="d-flex gap-2">
                 <Button variant="warning" onClick={handleLogOut}>
                   Log Out
                 </Button>
-                {loggedUser.userType === 2 && (
-                  <Button as={Link} to="/Registrarse" variant="warning" className="custom-button">
-                    Create Admin
-                  </Button>
+                {(loggedUser.userType === 2 || loggedUser.userType === 1) && (
+                  <Button
+                  as={Link}
+                  to="/adminPage"
+                  variant="warning"
+                  className="custom-button-cart"
+                  style={{ paddingRight: "20px" }}
+                >
+                  Admin
+                </Button>
                 )}
                 <h3>{userName}</h3>
               </div>
