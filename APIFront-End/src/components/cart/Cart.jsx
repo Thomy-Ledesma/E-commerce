@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { Card, Button, Row, Col } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { Card, Button, Row, Col, Modal } from "react-bootstrap";
 import { CartContext } from "./CartContext";
 import { Context } from "../../context";
 import usePurchaseAlbums from "../../hooks/usePurchaseAlbum";
@@ -9,17 +9,27 @@ const Cart = () => {
   const { cart, removeFromCart, clearCart } = useContext(CartContext);
   const { loggedUser } = useContext(Context);
   const [data, loading, error, purchaseAlbums] = usePurchaseAlbums();
+  const [showCashModal, setShowCashModal] = useState(false);
+  const [showTransferModal, setShowTransferModal] = useState(false);
 
-  const totalAmount = cart.reduce((sum, album) => sum + album.price * album.amount, 0);
+  const totalAmount = cart.reduce(
+    (sum, album) => sum + album.price * album.amount,
+    0
+  );
 
-  const handlePurchase = async () => {
-    const albumIds = cart.map(album => album.id);
+  const handlePurchase = async (cashMethod) => {
+    const albumIds = cart.map((album) => album.id);
     const userId = loggedUser.id;
-    console.log('Album IDs:', albumIds);
-    console.log('User ID:', userId);
+    console.log("Album IDs:", albumIds);
+    console.log("User ID:", userId);
+    if (cashMethod) {
+      setShowCashModal(true);
+    } else {
+      setShowTransferModal(true);
+    }
     await purchaseAlbums(albumIds, userId);
     if (!error) {
-      clearCart(); // Clear the cart if the purchase is successful
+      clearCart();
     }
   };
 
@@ -55,12 +65,83 @@ const Cart = () => {
             <Button variant="danger" onClick={clearCart}>
               Clear Cart
             </Button>
-            <Button variant="success" onClick={handlePurchase} disabled={loading}>
-              {loading ? 'Purchasing...' : 'Purchase'}
+            <Button
+              variant="success"
+              onClick={() => handlePurchase(false)}
+              disabled={loading}
+            >
+              {loading ? "Purchasing..." : "Pay by Transfer"}
             </Button>
           </div>
           {error && <p className="text-danger">Error: {error}</p>}
           {data && <p className="text-success">Purchase successful!</p>}
+
+          <Row className="payment-options">
+            <Col>
+              <h4 className="text-white">1st Option: CASH PAYMENT</h4>
+              <p className="text-white">Direccion Mitre 415</p>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  setShowCashModal(true);
+                }}
+              >
+                Pay in Cash
+              </Button>
+              <Modal
+                show={showCashModal}
+                onHide={() => setShowCashModal(false)}
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>Cash Payment Information</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  You can pick up your purchase from Monday to Friday from 09:00
+                  to 18:00 at the address provided. Thank you!
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setShowCashModal(false)}
+                  >
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </Col>
+            <Col>
+              <h4 className="text-white">2nd Option: BANK TRANSFER</h4>
+              <p className="text-white">CBU: 12344567891012345</p>
+              <Button
+                variant="info"
+                onClick={() => handlePurchase(true)}
+                disabled={loading}
+              >
+                Pay by Transfer
+              </Button>
+              <Modal
+                show={showTransferModal}
+                onHide={() => setShowTransferModal(false)}
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>Bank Transfer Information</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  Please send the payment confirmation to
+                  discomaniacos@gmail.com. We will confirm your payment by
+                  email. Thank you!
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setShowTransferModal(false)}
+                  >
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </Col>
+          </Row>
         </>
       )}
     </div>

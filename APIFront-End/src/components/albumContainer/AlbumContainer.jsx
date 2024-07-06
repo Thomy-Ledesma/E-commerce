@@ -54,10 +54,10 @@ const AlbumContainer = ({ albums }) => {
               <AlbumCard key={album.id} album={album} /> // Usar album.id como key única
             ))
           ) : (
-            <p className="text-white">No hay álbumes en esta página</p>
+            <h1 className="text-white">No hay álbumes en esta página</h1>
           )
         ) : (
-          <p className="text-white">No hay álbumes</p>
+          <h1 className="text-white">No hay álbumes</h1>
         )}
       </div>
       {displayedAlbums.length > 0 && (

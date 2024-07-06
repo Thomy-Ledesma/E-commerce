@@ -54,7 +54,7 @@ function AlbumPage() {
         <div className='product'>
           <div className='col-5' style={{ margin: '2em' }}>
             <img src={albumInfo.photoURL} alt="" className='album-cover' />
-            <h1>{albumInfo.name}</h1>
+            <h1 className='text-black'>{albumInfo.name}</h1>
             <h2>{albumInfo.band}</h2>
           </div>
           <div className='col-7'>
