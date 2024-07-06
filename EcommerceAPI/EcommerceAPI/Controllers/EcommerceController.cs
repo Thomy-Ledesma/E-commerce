@@ -41,6 +41,13 @@ namespace EcommerceAPI.Controllers
         public string Category { get; set; }
         public int Amount { get; set; }
     }
+    public class ReviewRequest
+    {
+        public string ProductId { get; set; }
+        public string UserId { get; set; }
+        public string Comments { get; set; }
+        public double Rating { get; set; }
+    }
     [ApiController]
     [Route("users")]
     public class UserController : ControllerBase
@@ -264,9 +271,9 @@ namespace EcommerceAPI.Controllers
 
         [HttpPost]
         [Route("addReview")]
-        public dynamic AddReview(string productId, string userId, string comments, double rating)
-        {   
-            var newReview = new Review(rating, comments, userId);
+        public IActionResult AddReview([FromBody] ReviewRequest request)
+        {
+            var newReview = new Review(request.Rating, request.Comments, request.UserId);
 
             var db = new MongoClient("mongodb://localhost:27017");
 
@@ -275,30 +282,30 @@ namespace EcommerceAPI.Controllers
             var products = database.GetCollection<Product>("products");
 
             var filter = Builders<Product>.Filter.And(
-                Builders<Product>.Filter.Eq("_id", ObjectId.Parse(productId)),
-                Builders<Product>.Filter.ElemMatch(product => product.Reviews, review => review.UserID == userId)
+                Builders<Product>.Filter.Eq("_id", ObjectId.Parse(request.ProductId)),
+                Builders<Product>.Filter.ElemMatch(product => product.Reviews, review => review.UserID == request.UserId)
             );
 
-            var update = Builders<Product>.Update.Set("reviews.$.rating", rating)
-                                         .Set("reviews.$.comments", comments);
+            var update = Builders<Product>.Update.Set("reviews.$.rating", request.Rating)
+                                                 .Set("reviews.$.comments", request.Comments);
 
             var result = products.FindOneAndUpdate(filter, update);
 
             if (result == null)
             {
                 // If the user's review doesn't exist, add a new review
-                var filterById = Builders<Product>.Filter.Eq("_id", ObjectId.Parse(productId));
+                var filterById = Builders<Product>.Filter.Eq("_id", ObjectId.Parse(request.ProductId));
                 var updateById = Builders<Product>.Update.Push("reviews", newReview);
                 products.UpdateOne(filterById, updateById);
-                return "New review added: \n" + newReview.ToJson();
+                return Ok(new { message = "New review added", review = newReview });
             }
             else
             {
                 // If the user's review exists, update it
-                return "Existing review updated: \n" + newReview.ToJson();
+                return Ok(new { message = "Review updated", review = newReview });
             }
         }
-        
+
         [HttpPost]
         [Route("addCategory")]
         public dynamic AddCategory(string id, string category)

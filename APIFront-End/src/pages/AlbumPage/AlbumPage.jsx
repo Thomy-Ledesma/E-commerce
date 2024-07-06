@@ -4,7 +4,6 @@ import "./AlbumPage.css";
 import ReviewList from '../../components/reviewList/ReviewList';
 import Button from 'react-bootstrap/Button';
 import { Context } from '../../context';
-import usePurchaseAlbum from '../../hooks/usePurchaseAlbum';
 import { CartContext } from '../../components/cart/CartContext';
 
 const URL = "https://localhost:7051/products/GetAlbum?id=";
@@ -19,8 +18,6 @@ function AlbumPage() {
     reviews: []
   });
   const [modalShow, setModalShow] = useState(false);
-
-  const [purchaseData, loading, purchaseError] = usePurchaseAlbum();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,7 +63,7 @@ function AlbumPage() {
               <ol>{listatemas}</ol>
             </div>
             <div className='rating-container' style={{ display: 'flex', alignItems: 'center' }}>
-              <h2 onClick={() => setModalShow(true)} className='rating'>{rating}</h2>
+              <h2 onClick={() => setModalShow(true)} className='rating'>{rating}☆</h2>
               <ReviewList
                 show={modalShow}
                 onHide={() => setModalShow(false)}

@@ -22,7 +22,9 @@ const AlbumContainer = ({ albums }) => {
   useEffect(() => {
     if (albums && albums.length > 0) {
       const shuffledAlbums = shuffleArray(albums); // Barajar los álbumes
-      setDisplayedAlbums(shuffledAlbums); // Actualizar el estado con los álbumes barajados
+      setDisplayedAlbums(shuffledAlbums.filter((album) => album.amount !== 0)); // Actualizar el estado con los álbumes barajados
+    } else {
+      setDisplayedAlbums([]);
     }
   }, [albums]);
 
@@ -46,33 +48,38 @@ const AlbumContainer = ({ albums }) => {
   return (
     <div className="albums-container-wrapper">
       <div className="albums-container">
-        {currentAlbums.length > 0 ? (
-          currentAlbums.map((album) => (
-            <AlbumCard key={album.id} album={album} />  // Usar album.id como key única
-          ))
+      {displayedAlbums.length > 0 ? (
+          currentAlbums.length > 0 ? (
+            currentAlbums.map((album) => (
+              <AlbumCard key={album.id} album={album} /> // Usar album.id como key única
+            ))
+          ) : (
+            <p className="text-white">No hay álbumes en esta página</p>
+          )
         ) : (
           <p className="text-white">No hay álbumes</p>
         )}
       </div>
-      <div className="pagination-controls">
-        <Button
-          onClick={handlePreviousPage}
-          disabled={currentPage === 0}
-          className="pagination-button"
-          variant="warning"
-        >
-          Previous
-        </Button>
-        <label>1</label>
-        <Button
-          onClick={handleNextPage}
-          disabled={currentPage >= Math.ceil(displayedAlbums.length / albumsPerPage) - 1}
-          className="pagination-button"
-          variant="warning"
-        >
-          Next
-        </Button>
-      </div>
+      {displayedAlbums.length > 0 && (
+        <div className="pagination-controls">
+          <Button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 0}
+            className="pagination-button"
+            variant="warning"
+          >
+            Previous
+          </Button>
+          <Button
+            onClick={handleNextPage}
+            disabled={currentPage >= Math.ceil(displayedAlbums.length / albumsPerPage) - 1}
+            className="pagination-button"
+            variant="warning"
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

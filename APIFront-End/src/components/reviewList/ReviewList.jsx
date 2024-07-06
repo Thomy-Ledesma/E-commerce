@@ -15,14 +15,14 @@ function ReviewList(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          Reviews
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
             {props.reviews.map((review) =>{
                 return (
                 <div key={review.userID}>
-                    <h4>{review.rating}</h4>
+                    <h4>{review.rating}☆</h4>
                     <h6 style={{marginLeft:"2em"}}>{review.comments}</h6>
                     <hr/>
                 </div>                    
