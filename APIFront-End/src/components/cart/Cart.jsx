@@ -22,15 +22,26 @@ const Cart = () => {
     const userId = loggedUser.id;
     console.log("Album IDs:", albumIds);
     console.log("User ID:", userId);
-    if (cashMethod) {
-      setShowCashModal(true);
-    } else {
-      setShowTransferModal(true);
-    }
+
     await purchaseAlbums(albumIds, userId);
+
     if (!error) {
-      clearCart();
+      if (cashMethod) {
+        setShowCashModal(true);
+      } else {
+        setShowTransferModal(true);
+      }
     }
+  };
+
+  const handleCloseCashModal = () => {
+    setShowCashModal(false);
+    clearCart();
+  };
+
+  const handleCloseTransferModal = () => {
+    setShowTransferModal(false);
+    clearCart();
   };
 
   return (
@@ -65,13 +76,6 @@ const Cart = () => {
             <Button variant="danger" onClick={clearCart}>
               Clear Cart
             </Button>
-            <Button
-              variant="success"
-              onClick={() => handlePurchase(false)}
-              disabled={loading}
-            >
-              {loading ? "Purchasing..." : "Pay by Transfer"}
-            </Button>
           </div>
           {error && <p className="text-danger">Error: {error}</p>}
           {data && <p className="text-success">Purchase successful!</p>}
@@ -82,15 +86,14 @@ const Cart = () => {
               <p className="text-white">Direccion Mitre 415</p>
               <Button
                 variant="primary"
-                onClick={() => {
-                  setShowCashModal(true);
-                }}
+                onClick={() => handlePurchase(true)}
+                disabled={loading}
               >
-                Pay in Cash
+                {loading ? "Purchasing..." : "Pay in Cash"}
               </Button>
               <Modal
                 show={showCashModal}
-                onHide={() => setShowCashModal(false)}
+                onHide={handleCloseCashModal}
               >
                 <Modal.Header closeButton>
                   <Modal.Title>Cash Payment Information</Modal.Title>
@@ -102,7 +105,7 @@ const Cart = () => {
                 <Modal.Footer>
                   <Button
                     variant="secondary"
-                    onClick={() => setShowCashModal(false)}
+                    onClick={handleCloseCashModal}
                   >
                     Close
                   </Button>
@@ -114,14 +117,14 @@ const Cart = () => {
               <p className="text-white">CBU: 12344567891012345</p>
               <Button
                 variant="info"
-                onClick={() => handlePurchase(true)}
+                onClick={() => handlePurchase(false)}
                 disabled={loading}
               >
-                Pay by Transfer
+                {loading ? "Purchasing..." : "Pay by Transfer"}
               </Button>
               <Modal
                 show={showTransferModal}
-                onHide={() => setShowTransferModal(false)}
+                onHide={handleCloseTransferModal}
               >
                 <Modal.Header closeButton>
                   <Modal.Title>Bank Transfer Information</Modal.Title>
@@ -134,7 +137,7 @@ const Cart = () => {
                 <Modal.Footer>
                   <Button
                     variant="secondary"
-                    onClick={() => setShowTransferModal(false)}
+                    onClick={handleCloseTransferModal}
                   >
                     Close
                   </Button>
